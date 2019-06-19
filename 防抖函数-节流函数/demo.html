@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>防抖函数，节流函数 以及 lodash 的对应函数的应用</title>
+	<style type="text/css">
+		textarea{
+			width: 500px;
+			height: 200px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			resize:none;
+		}
+	</style>
+</head>
+<body>
+	<button id="debounce-native" class="btn-action">click - debounce native</button>
+
+	<button id="throttle-native" class="btn-action">click - throttle-native</button>
+
+	<button id="debounce-lodash" class="btn-action">click - debounce-lodash</button>
+
+	<button id="throttle-lodash" class="btn-action">click - throttle-lodash</button>
+	
+	<p>执行结果：</p>
+	<textarea name="result" id="result"></textarea>
+
+	<ul>
+		<li>防抖函数 类似游戏技能读条，读条完了才执行函数，未读完条再执行就被取消掉，重新计时</li>
+		<li>节流函数以某种频率执行函数</li>
+	</ul>
+
+	<script src="https://cdn.bootcss.com/lodash.js/4.17.12-pre/lodash.min.js"></script>
+	<script type="text/javascript">
+		const ele_result = document.querySelector('#result')
+		const delay = 1000
+		const handler = function(e){
+			let _result = `${this.id} called ...${Date.now()}`
+			ele_result.value += _result+'\n'
+			console && console.log && console.log(_result)
+		}
+
+		const handlerObj = {
+			'debounce-native':debounce(handler,delay),
+			'throttle-native':throttle(handler,delay),
+			'debounce-lodash':_.debounce(handler,delay),
+			'throttle-lodash':_.throttle(handler,delay)
+		}
+
+		//防抖函数 类似游戏技能读条，读条完了才执行函数，未读完条再执行就被取消掉，重新计时
+		function debounce(fun,delay){
+			return function(){
+				let _args = Array.from(arguments)
+				let that = this
+				clearTimeout(fun.id)
+				fun.id = setTimeout(function(){
+					fun.apply(that,_args)
+				},delay)
+			}
+		}
+
+		//节流函数以某种频率执行函数
+		function throttle(fun,delay){
+			let last = 0
+			return function(){
+				let that = this
+				let args = Array.from(arguments)
+				let now = Date.now()
+				if(now > (last + delay)){
+					fun.apply(that,args)
+					last = Date.now()
+				}
+			}
+		}
+
+		function bindEvent(){
+			for(let btn of document.querySelectorAll('.btn-action')){
+				btn.addEventListener('click',handlerObj[btn.id])
+			}
+		}
+
+		bindEvent()
+	</script>
+</body>
+</html>
