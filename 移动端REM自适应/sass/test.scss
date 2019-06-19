@@ -1,0 +1,94 @@
+@function px2rem($px){
+	/*根据IPhone6 375 为基准 */
+	$rem:37.5px;
+	@return ($px / $rem + rem)
+}
+
+*{
+	padding: 0;
+	margin:0;
+	box-sizing: border-box;
+}
+
+ul,ol,li{
+	list-style: none;
+}
+
+html,body{
+	min-width: 320px;
+	max-width: 720px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.header{
+	height: px2rem(40px);
+	width: 100%;
+	background-color: red;
+	padding-left: px2rem(23px);
+	
+	.header-item{
+		float: left;
+		font-size: px2rem(16px);
+		color: #ffcdce;
+		margin-right: px2rem(20px);
+		line-height: px2rem(40px);
+
+		&:nth-child(2){
+			color: #fff;
+			font-size: px2rem(17px);
+		}
+	}
+}
+
+/*幻灯片*/
+.swiper-container{
+	background-color: #ffcdce;
+}
+.swiper-slide img{
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.swiper-slide p{
+	position: absolute;
+	left: px2rem(10px);
+	bottom: px2rem(10px);
+	color: #fff;
+	font-size: px2rem(16px);
+}
+
+/*新闻列表*/
+
+.news{
+	margin: 0 px2rem(10px);
+	.news-item{
+		padding: px2rem(10px) 0;
+		border-bottom: px2rem(1px) solid #f5f7f9;
+		overflow: hidden;
+		img{
+			width: px2rem(120px);
+			max-width: px2rem(120px);
+			height: auto;
+			float: left;
+			
+			box-shadow: 0 1px 3px rgba(0,0,0,.3)
+		}
+		.news-info{
+			margin-left: px2rem(130px);
+			font-size: px2rem(16px);
+			color: #333;
+
+			.news-from{
+				font-size: px2rem(12px);
+				color: #aaa;
+				margin-top: px2rem(15px);
+
+				span {
+					margin-right: px2rem(10px);
+				}
+			}
+		}
+	}
+}

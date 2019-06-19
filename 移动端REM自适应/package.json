@@ -1,0 +1,24 @@
+{
+  "name": "sass-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test1": "node-sass sass/test.scss -o css/test.css",
+    "test2": "node-sass --output-style expanded sass/test.scss -o css/",
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --watch --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^3.0.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "swiper": "^4.5.0",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
+  }
+}
