@@ -2,6 +2,7 @@
 
 ### 题目介绍
 >实现一个LazyMan，可以按照以下方式调用:
+
 >LazyMan("Hank")
 >输出:
 Hi! This is Hank!
