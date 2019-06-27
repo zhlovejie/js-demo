@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    *{margin:0;padding:0;box-sizing: border-box;}
+    ol,ul,li{list-style-type: none;}
+
+    html,body{
+      background-color: #f5f5f5;
+    }
+
+    .wrapper{
+      width: 100%;
+      min-width: 320px;
+      max-width: 640px;
+      margin-left:auto;
+      margin-right: auto;
+    }
+    .list{
+      position: relative;
+      background-color: #fff;
+    }
+
+    .list > li{
+      padding: 15px 0;
+      text-align: center;
+      margin-left: 15px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <ul class="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+    </ul>
+  </div>
+  <script>
+    const list = document.querySelectorAll('.list')[0]
+    list.addEventListener('touchstart',start,false)
+    list.addEventListener('touchmove',move,false)
+    list.addEventListener('touchend',end,false)
+    list.addEventListener('touchcancel',cancel,false)
+    list.addEventListener('click',clickAction,false)
+    list.addEventListener('tap',tapAction,false)
+    list.addEventListener('tap123',tapAction,false)
+
+    let touch = {}
+
+    function tapAction(event){
+      console.log(arguments)
+      console.log('tapAction called..')
+      console.log(this)
+    }
+
+    function clickAction(event){
+      console.log(event)
+    }
+    function start(event){
+      console.log(event)
+      let firstTouch = event.touches[0]
+      touch.el = 'tagName' in firstTouch.target 
+        ? firstTouch.target 
+        : firstTouch.target.parentNode
+      touch.x1 = firstTouch.pageX
+      touch.y1 = firstTouch.pageY
+      touch.last = Date.now()
+    }
+    function move(event){
+      console.log(event)
+    }
+    function end(event){
+      console.log(event)
+      let _now = Date.now()
+      let diff = _now - touch.last
+      console.log(diff)
+
+      if(diff < 200){
+        //alert('tap....')
+        console.log(touch)
+        trigger(touch.el,'tap')
+      }
+      
+      event.preventDefault()
+      event.stopPropagation()
+
+      touch = {}
+    }
+    function cancel(event){
+      console.log(event)
+    }
+
+
+    function trigger(ele,type){
+      let event = document.createEvent('Event')
+      event.initEvent(type,true,true)
+      ele.dispatchEvent(event)
+    }
+
+
+
+  </script>
+</body>
+</html>
