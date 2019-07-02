@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>幻灯片DEMO</title>
+  <link rel="stylesheet" href="./css/i.css">
+</head>
+<body>
+  <div class="container-slide">
+    <dic class="slide-show">
+      <div class="slide-item" data-item-index="0"><a href=""><img src="./img/1.jpg" alt=""></a></div>
+      <div class="slide-item" data-item-index="1"><a href=""><img src="./img/2.jpg" alt=""></a></div>
+      <div class="slide-item" data-item-index="2"><a href=""><img src="./img/3.jpg" alt=""></a></div>
+      <div class="slide-item" data-item-index="3"><a href=""><img src="./img/4.jpg" alt=""></a></div>
+      <div class="slide-item" data-item-index="4"><a href=""><img src="./img/5.jpg" alt=""></a></div>
+    </dic>
+    <div class="slide-counter">
+      <span class="current"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <script>
+    const items = Array.from(document.querySelectorAll('.slide-item'))
+    bindEvent()
+    const slideCounterItems = Array.from(document.querySelectorAll('.slide-counter span'))
+    let currentItemIndex = 0
+    let width = items[currentItemIndex].offsetWidth
+    function setPosition(itemIndex){      
+      let leftItemIndex = itemIndex - 1
+      leftItemIndex = leftItemIndex < 0 ? leftItemIndex + items.length : leftItemIndex
+      let rightItemIndex= itemIndex + 1
+      rightItemIndex = rightItemIndex >= items.length ? rightItemIndex - items.length : rightItemIndex
+
+      slideCounterItems.forEach(function(val,index){
+        if(itemIndex === index){
+          val.classList.add('current')
+        }else{
+          val.classList.contains('current') && val.classList.remove('current')
+        }
+      })
+
+      if(itemIndex === items.length || itemIndex === 0){
+        items[rightItemIndex].classList.add('change-opacity')
+        items[rightItemIndex].style.opacity = 0
+      }
+      
+      items[itemIndex].style.transform = 'translate3d(0px,0px,0px)'
+      items[leftItemIndex].style.transform = 'translate3d(-'+width+'px,0,0)'
+      items[rightItemIndex].style.transform = 'translate3d('+width+'px,0,0)'
+    }
+
+    setPosition(currentItemIndex)
+
+    setInterval(function(){
+      currentItemIndex++
+      if(currentItemIndex >= items.length) currentItemIndex = 0
+      setPosition(currentItemIndex)
+    },3000)
+
+    function bindEvent(){
+      items.forEach((item,index)=>{
+        item.addEventListener('webkitTransitionEnd',animationEndHandler,false)
+      })
+    }
+
+    function animationEndHandler(event){
+      if(event.target.classList.contains('change-opacity')){
+        event.target.style.opacity = 1
+        event.target.classList.remove('change-opacity')
+      }
+    }
+
+
+  </script>
+</body>
+</html>
