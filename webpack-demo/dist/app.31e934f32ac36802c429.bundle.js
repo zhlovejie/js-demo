@@ -81,20 +81,31 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/print.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/test.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/print.js":
+/***/ "./src/file.txt":
 /*!**********************!*\
-  !*** ./src/print.js ***!
+  !*** ./src/file.txt ***!
   \**********************/
-/*! exports provided: default */
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval(" module.exports = 'CBADEFG' \n\n//# sourceURL=webpack:///./src/file.txt?");
+
+/***/ }),
+
+/***/ "./src/test.js":
+/*!*********************!*\
+  !*** ./src/test.js ***!
+  \*********************/
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return printMe; });\nfunction printMe(){\r\n  console111.log('I get called from print.js!');\r\n}\n\n//# sourceURL=webpack:///./src/print.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _file_txt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./file.txt */ \"./src/file.txt\");\n/* harmony import */ var _file_txt__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_file_txt__WEBPACK_IMPORTED_MODULE_0__);\n //会触发对应的loader\r\n\r\nfunction component(){\r\n  const divEle = document.createElement('div')\r\n\r\n  //这里的txt值为 uppercase-loader.js 动态执行返回值\r\n  divEle.innerText = _file_txt__WEBPACK_IMPORTED_MODULE_0___default.a\r\n  document.body.appendChild(divEle)\r\n}\r\n\r\ncomponent()\n\n//# sourceURL=webpack:///./src/test.js?");
 
 /***/ })
 
