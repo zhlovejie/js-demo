@@ -1,5 +1,7 @@
 # match-live-app
 
+[参考滴滴](https://github.com/cube-ui/cube-application-guide)
+
 ## Project setup
 ```
 npm install
