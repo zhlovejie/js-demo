@@ -1,0 +1,44 @@
+
+@charset "utf-8";
+/* CSS Document */
+div{outline:none;}
+body{background: #fff;-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;}
+canvas {padding: 0;margin: 0;width: 100%;height: 100%;overflow: hidden;}
+.wrap{width: 100%;height: 100%; max-height: 10.4rem;position: absolute;overflow: hidden;}
+.audio{ position: fixed;top:.17rem; right:.1rem ; width:.45rem ; height:.45rem; z-index:100; }
+.Windn{width:100%; height:100%; position:fixed; overflow:hidden;top:0; left: 0; z-index:999; background:rgba(0,0,0,0.8);}
+#barcode1{opacity: 0;}
+@-webkit-keyframes reg {
+	to{-webkit-transform:rotate(360deg);}
+}
+.reg{-webkit-animation:reg 1.5s linear infinite normal;}
+
+#loadTxt {position: absolute;color: #fff;font-size: .3rem;width: 100%;text-align: center;top:65%;}
+#loadDiv {background:url(../images/loading.jpg)no-repeat center/100% 100%;width: 100%;height: 100%;z-index: 1000;position: absolute;top: 0px;}
+.load{background: url(../images/load1.png)no-repeat center/contain;width:2.78rem;height:3.68rem;top:25%;-webkit-animation: load 2s step-end infinite;}
+@-webkit-keyframes load {
+	0%,100% {background-image: url(../images/load1.png)}
+	20% {background-image: url(../images/load2.png)}
+	40% {background-image: url(../images/load3.png)}
+	60% {background-image: url(../images/load4.png)}
+    80% {background-image: url(../images/load5.png)}
+}
+.load1{bottom: 5%;width: 1.6rem;}
+.load2{position: absolute;top:0.5rem;left: 0.5rem;}
+
+.index{width: 100%;height: 100%;position: absolute;top:0;overflow: hidden;}
+.index .ts_box{top:10%;}
+.index .btn1{background: url(../images/btn1.png)no-repeat center/contain;width:2.23rem;height:.66rem;position: absolute;bottom:0.5rem;left:.6rem;}
+.index .btn2{background: url(../images/btn2.png)no-repeat center/contain;width:2.23rem;height:.66rem;position: absolute;bottom:0.5rem;right:.6rem;}
+
+
+.hb .hb_box{width:5.32rem;height:9rem;}
+.hb img{width:5.32rem;height:8.11rem;}
+.hb .ts2{background: url(../images/ts2.png)no-repeat center/contain;width:4.57rem;height:2.3rem;top: 4.66rem;margin-left: -0.02rem;}
+.hb .ts3{background: url(../images/ts3.png)no-repeat center/contain;width:.81rem;height:.12rem;position: absolute;top:6.14rem;left:3.97rem;}
+.hb .close_btn{background: url(../images/close.png)no-repeat center/contain;width:2.23rem;height:.66rem;bottom:5%;}
+.hb .hb_img2{width: 100%;height: 100%;opacity: 0;z-index: 1;}
+
+.weix .weix_img{top:-0.1rem;width: 4.2rem}
+.weix .weix_box{width:5.32rem;height:7rem;}
+.weix .close_btn{background: url(../images/close.png)no-repeat center/contain;width:2.23rem;height:.66rem;bottom: -0.2rem;}

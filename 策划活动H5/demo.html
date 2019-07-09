@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>那些年，我们的生活新势</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="max-age=0" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="all">
+    <meta name="Language" content="zh-CN" />
+    <meta name="publisher" content="矩阵互动www.juzhen.com">
+    <link rel="stylesheet" href="style/my.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/animate.css">
+    <script type="text/javascript" src="lib/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="http://weixin.juzhen.com/WebServices/matrix.weixin.share.2.0.1.js"></script>
+    <script src="lib/index.js"></script>
+    <script type="text/javascript">
+        /*实施改变html的fontSize值*/
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 50 * (clientWidth / 320) + 'px';
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+        /* 判断横竖屏 */
+        function orientationChange() {
+            switch (window.orientation) {
+                case 0: break;
+                case -90: alert("请竖屏查看页面，效果更佳"); break;
+                case 90: alert("请竖屏查看页面，效果更佳"); break;
+                case 180: break;
+            };
+        };
+        /* 添加事件监听 */
+        addEventListener('load', function () {
+            orientationChange();
+            window.onorientationchange = orientationChange;
+        });
+        // loading
+        function load(manifest, callback) {
+            for (var i = 0; i < manifest.length; i++) {
+                var images = [];
+                var count = 0;
+                images[i] = new Image();
+                images[i].src = "images/" + manifest[i].src;
+                images[i].classname = manifest[i].class;
+                images[i].onload = function () {
+                    count++;
+                    var itemClass = this.classname;
+                    //进度
+                    var progress = parseInt((count / manifest.length) * 100);
+                    if (itemClass) {
+                        var w = this.width / 100 + "rem";
+                        $("." + itemClass).width(w);
+                        $("." + itemClass).attr("src", this.src);
+                    }
+                    if (count >= manifest.length) {
+                        callback();
+                    }
+                }
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function (event) {
+            load(manifest, function () {
+                // setTimeout(function () { $("#loadDiv").fadeOut(); }, 2000);
+                // setTimeout(function () { $(".index").fadeIn(); }, 2000);
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="loadDiv">
+        <div class="load t_center"></div>
+        <div id="loadTxt" class="g_center">0%</div>
+        <img class="load2">
+        <img class="load1 t_center" src="images/logo.png">
+    </div>
+
+    <!-- 背景音乐 -->
+    <img src="images/music.png" class="audio reg dn" onclick="change()">
+    <audio loop preload="auto" controls hidden id="music" src="music/bg_music.mp3"></audio>
+
+    <audio hidden  id="music0" src="music/0.mp3"></audio>
+    <audio hidden  id="music1" src="music/1.mp3"></audio>
+    <audio hidden  id="music2" src="music/2.mp3"></audio>
+    <audio hidden  id="music3" src="music/3.mp3"></audio>
+    <audio hidden  id="music4" src="music/4.mp3"></audio>
+    <audio hidden  id="music5" src="music/5.mp3"></audio>
+    <audio hidden  id="music6" src="music/6.mp3"></audio>
+    <audio hidden  id="music7" src="music/7.mp3"></audio>
+    <audio hidden  id="music8" src="music/8.mp3"></audio>
+    <audio hidden  id="music9" src="music/9.mp3"></audio>
+
+    <audio hidden  id="music10" src="music/wd.mp3"></audio>
+    <audio hidden  id="music11" src="music/hkz.mp3"></audio>
+    <audio hidden  id="music12" src="music/qc.mp3"></audio>
+    <audio hidden id="music13" src="music/gj.mp3"></audio>
+    <audio hidden  id="music14" src="music/bike.mp3"></audio>
+    <audio hidden  id="music15" src="music/lxy.mp3"></audio>
+    <audio hidden  id="music16" src="music/qiu.mp3"></audio>
+    <audio hidden  id="music17" src="music/chuan.mp3"></audio>
+    <audio hidden  id="music18" src="music/jm.mp3"></audio>
+    <audio hidden  id="music19" src="music/yxt.mp3"></audio>
+    <audio hidden  id="music20" src="music/over.mp3"></audio>
+
+    <!-- 画面开始 -->
+    <div class="index" id="index">
+        <div class="Windn ts" onclick="popHide('.ts')">
+            <img class="ts_box t_center">
+        </div>
+
+        <div class="btn1 fadeInUp animated dn" onclick="gs.top()"></div>
+        <div class="btn2 fadeInUp animated dn" onclick="popShow('.weix')"></div>
+    </div>
+
+    <!-- 海报 -->
+    <div class="hb Windn dn hb_1">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb1.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb1.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_1')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_2">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb2.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb2.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_2')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_3">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb3.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb3.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_3')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_4">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb4.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb4.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_4')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_5">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb5.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb5.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_5')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_6">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb6.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb6.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_6')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_7">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb7.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb7.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_7')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_8">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb8.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb8.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_8')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_9">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb9.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb9.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_9')"></div>
+    </div>
+
+    <div class="hb Windn dn hb_10">
+        <div class="hb_box g_center">
+            <img class="hb_img" src="images/hb10.png">
+            <div class="ts2 t_center"></div>
+        </div>
+        <img class="hb_img2" src="images/hb10.png">
+        <div class="close_btn t_center" onclick="popHide('.hb_10')"></div>
+    </div>
+
+    <!-- 二维码 -->
+    <div class="weix Windn dn">
+        <div class="weix_box g_center">
+            <img class="weix_img t_center" src="images/weix.jpg">
+            <div class="close_btn t_center" onclick="popHide('.weix')"></div>
+        </div>
+    </div>
+</body>
+<script src="lib/pixi.js"></script>
+<script src="lib/tweenjs.min.js"></script>
+<!-- src -->
+<script src="src/main.js"></script>
+<script src="lib/Actions.js"></script>
+<script>
+    manifest = [
+        { src: "ts.png", class: "ts_box" },
+        { src: "logos.png", class: "load2" },
+        { src: "weix.jpg", class: "" },
+        { src: "logo.png", class: "" },
+        { src: "hb1.png", class: "" },
+        { src: "hb2.png", class: "" },
+        { src: "hb3.png", class: "" },
+        { src: "hb4.png", class: "" },
+        { src: "hb5.png", class: "" },
+        { src: "hb6.png", class: "" },
+        { src: "hb7.png", class: "" },
+        { src: "hb8.png", class: "" },
+        { src: "btn1.png", class: "" },
+        { src: "btn2.png", class: "" },
+    ]
+    function popShow(id) {
+        $(id + "").fadeIn();
+    }
+    function popHide(id) {
+        $(id + "").fadeOut();
+    }
+
+    //禁止页面滑动
+    $('#loadDiv,.cx_page').on('touchmove', function (event) {
+        event.preventDefault();
+    });
+
+    //背景音乐
+    var audio = document.getElementById('music');
+    var audio0 = document.getElementById('music0');
+    var audio1 = document.getElementById('music1');
+    var audio2 = document.getElementById('music2');
+    var audio3 = document.getElementById('music3');
+    var audio4 = document.getElementById('music4');
+    var audio5 = document.getElementById('music5');
+    var audio6 = document.getElementById('music6');
+    var audio7 = document.getElementById('music7');
+    var audio8 = document.getElementById('music8');
+    var audio9 = document.getElementById('music9');
+    var audio10 = document.getElementById('music10');
+    var audio11 = document.getElementById('music11');
+    var audio12 = document.getElementById('music12');
+    var audio13 = document.getElementById('music13');
+    var audio14 = document.getElementById('music14');
+    var audio15 = document.getElementById('music15');
+    var audio16 = document.getElementById('music16');
+    var audio17 = document.getElementById('music17');
+    var audio18 = document.getElementById('music18');
+    var audio19 = document.getElementById('music19');
+    var audio20 = document.getElementById('music20');
+
+    function playmusic(a) {
+        window[a].play();
+        if (window[a].paused) {
+            window[a].currentTime = 0;
+        }
+    }
+    function stopmusic(a) {
+        window[a].pause();
+        window[a].currentTime = 0
+    }
+    function change() {
+        if (audio.paused) {
+            audio.play();
+            $(".audio").addClass('reg')
+        }
+        else {
+            audio.pause();
+            $(".audio").removeClass('reg')
+        }
+
+    }
+    function audioAutoPlay(id) {
+        var audio = document.getElementById(id);
+        audio.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audio.play();
+        }, false);
+        document.addEventListener('YixinJSBridgeReady', function () {
+            audio.play();
+        }, false);
+    }
+    // audioAutoPlay('music');
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        audio0.play();
+        audio0.pause();
+        audio1.play();
+        audio1.pause();
+        audio2.play();
+        audio2.pause();
+        audio3.play();
+        audio3.pause();
+        audio4.play();
+        audio4.pause();
+        audio5.play();
+        audio5.pause();
+        audio6.play();
+        audio6.pause();
+        audio7.play();
+        audio7.pause();
+        audio8.play();
+        audio8.pause();
+        audio9.play();
+        audio9.pause();
+        audio10.play();
+        audio10.pause();
+        audio11.play();
+        audio11.pause();
+        audio12.play();
+        audio12.pause();
+        audio13.play();
+        audio13.pause();
+        audio14.play();
+        audio14.pause();
+        audio15.play();
+        audio15.pause();
+        audio16.play();
+        audio16.pause();
+        audio17.play();
+        audio17.pause();
+        audio18.play();
+        audio18.pause();
+        audio19.play();
+        audio19.pause();
+        audio20.play();
+        audio20.pause();
+    }, false);
+
+</script>
+
+</html>

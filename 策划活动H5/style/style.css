@@ -1,0 +1,44 @@
+/*
+ * Version: 0.0.3
+ * Author: Tyw
+ * Create: 2016-04-22
+ * Update: none
+ */
+@charset "utf-8";
+body,dl,dd,h1,h2,h3,h4,h5,h6,p,form,ol,li,ul{margin:0; padding:0;}
+html{font-size:50px;font-family:"microsoft yahei";}
+html,body{width:100%;height:100%;}
+body{font-size:.24rem;}
+body{line-height:1;}
+a {text-decoration:none;background:transparent; outline:0;}
+a:hover, a:focus {text-decoration:none;}
+a:hover, a:active {outline:0;}
+img{width:100%;/* display:block; */}
+input,textarea{outline:none;}
+input{padding:0;margin:0;border:none;}
+input[type="submit"],input[type="reset"],input[type="button"],button{-webkit-appearance:none;}
+ol,ul{list-style:none;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;} 
+body{line-height:1;} 
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;} 
+table{border-collapse:collapse;border-spacing:0;}
+@media only screen and (min-width:641px) {
+	html{
+		font-size:48px !important;
+	}
+}
+/*通用css*/
+.dn{display:none;}
+.tcc{position:fixed;z-index:100;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:none;}
+.t_center{position:absolute;left:50%;-webkit-transform:translateX(-50%);}
+.v_center{position:absolute;top:50%;-webkit-transform:translateY(-50%);}
+.g_center{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);}
+
+.cfe474c{background-color:#fe474c; }
+.cfb9521{background-color:#fb9521; }
+.cfcd22f{background-color:#fcd22f; }
+.cabd462{background-color:#abd462; }
+.c4ec5bb{background-color:#4ec5bb; }
+.c0893ce{background-color:#0893ce; }
+.c7d78c5{background-color:#7d78c5; }
