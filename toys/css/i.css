@@ -167,3 +167,9 @@ input[type='radio']:checked{background-position: 0 -110px;}
 .w-chkbox{position: relative;top: -1.5px;margin-bottom: 1rem;}
 .w-chkbox label,.w-chkbox span{vertical-align: middle;}
 /*多选框  END*/
+
+/* 1像素问题 */
+.one-px-demo{display: block;width: 100%;}
+.one-px-demo li{margin-left: 1rem;padding: 1rem 0;text-align: center;}
+.one-px-demo li:last-child{border: none;}
+/* 1像素问题 END */

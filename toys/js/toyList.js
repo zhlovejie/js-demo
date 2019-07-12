@@ -68,5 +68,17 @@ const toyList = [
     </div>
 
     `
+  },
+  {
+    title:'移动端一像素问题',
+    content:`
+      <ul class="one-px-demo border-top-1px border-bottom-1px">
+        <li class="border-bottom-1px">1</li>
+        <li class="border-bottom-1px">2</li>
+        <li class="border-bottom-1px">3</li>
+        <li class="border-bottom-1px">4</li>
+        <li>5</li>
+      </ul>
+    `
   }
 ]
