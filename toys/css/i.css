@@ -18,7 +18,11 @@ html,body{background-color: #f5f5f5;}
   padding: 1rem;
   position: relative;
 }
-.panel-group{padding: .5rem;}
+.panel-group{
+  max-width: 640px;
+  margin: auto;
+  padding: .5rem;
+}
 .panel{margin-bottom: 1rem;background-color: #fff;box-shadow: 0 0 3px #ddd;}
 
 /* css三角形 */
