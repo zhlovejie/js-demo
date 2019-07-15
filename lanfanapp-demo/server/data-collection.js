@@ -17,10 +17,6 @@ function run(url){
     indexJson.recipeList.push(__recipe)
     fileApi.writeJSON(fileApi.files.index,JSON.stringify(indexJson))
 
-    // const collectJson = fileApi.readJSON(fileApi.files.collects)
-    // collectJson.collects.push(collectInfo)
-    // fileApi.writeJSON(fileApi.files.collects,JSON.stringify(collectJson))
-
     console.log(`${__recipe.id} --${__recipe.name}`)
   })
   .catch((err)=>{
@@ -35,12 +31,3 @@ async function init(){
   }
   console.log('over...')
 }
-
-
-//init()
-//console.log(typeof readJSON(files.index))
-
-//console.log(result.match(/<title>([\s\S]*)<\/title>/)[0])
-//fileApi.testCreate('../test123')
-
-//fileApi.writeJSON('../test123/test.txt','hello node...')
