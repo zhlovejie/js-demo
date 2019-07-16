@@ -10,7 +10,6 @@ const pathList = [
   path.join(filesBaseDir,'index4.json')
 ]
 
-
 function readJSON(filePath){
   let result
   try{
@@ -24,7 +23,6 @@ function readJSON(filePath){
   return result
 }
 
-
 function getAllData(){
   let res = []
   pathList.reduce(function(total,val,index,arr){
@@ -35,7 +33,6 @@ function getAllData(){
   console.log(res.length)
   return res
 }
-
 
 function test_n_collects(arrFilterKeys){
   let result = getAllData().filter(item=>{
@@ -55,14 +52,5 @@ function test_n_collects(arrFilterKeys){
 
 }
 
-test_n_collects(['米','饭','面','面条'])
-
-
-let category = [
-  {
-    tagName:'今日推荐',
-    keys:['米','饭','面','面条'],
-    page:10
-  }
-]
+//test_n_collects(['米','饭','面','面条'])
 

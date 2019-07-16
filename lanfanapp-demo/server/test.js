@@ -1,16 +1,25 @@
 function delay(ms){
   return new Promise(function(resolve,reject){
     setTimeout(function(){
-      resolve()
+      resolve(ms)
     },ms)
   })
 }
 
-async function init(){
-  for(let i=0;i<10;i++){
-    console.log(i)
-    await delay(1000)
-  }
-}
+delay(500)
+.then(function(){
+  console.log(arguments)
+  return arguments[0]
+})
+.then(function(){
+  console.log(arguments)
+})
 
-init()
+// async function init(){
+//   for(let i=0;i<10;i++){
+//     console.log(i)
+//     await delay(1000)
+//   }
+// }
+
+// init()
