@@ -1,0 +1,92 @@
+{
+    "categories": [],
+    "create_time": "2018-03-28 18:54:01",
+    "desc": "",
+    "difficulty_text": "零厨艺✌️",
+    "id": 101,
+    "image": {
+        "ident": "22efab051dfc4b488d64958606826fd0_1082w_1914h.png",
+        "max_height": 4096,
+        "max_width": 4096,
+        "original_height": 1914,
+        "original_width": 1082,
+        "url_pattern": "http:\u002F\u002Fi2.chuimg.com\u002F22efab051dfc4b488d64958606826fd0_1082w_1914h.png?imageView2\u002F1\u002Fw\u002F{width}\u002Fh\u002F{height}\u002Fq\u002F90\u002Fformat\u002F{format}"
+    },
+    "ing_groups": [{
+        "ings": [{
+            "amount": "14个",
+            "calories": 0,
+            "carbohydrate": 0,
+            "fat": 0,
+            "name": "口蘑",
+            "protein": 0
+        }, {
+            "amount": "3g",
+            "calories": 0,
+            "carbohydrate": 0,
+            "fat": 0,
+            "name": "盐",
+            "protein": 0
+        }, {
+            "amount": "适量",
+            "calories": 0,
+            "carbohydrate": 0,
+            "fat": 0,
+            "name": "黑胡椒",
+            "protein": 0
+        }, {
+            "amount": "5ml",
+            "calories": 0,
+            "carbohydrate": 0,
+            "fat": 0,
+            "name": "油",
+            "protein": 0
+        }],
+        "name": ""
+    }],
+    "n_collects": "1805",
+    "name": "怎么吃都不胖的煎口蘑",
+    "name_adj": "鲜嫩多汁の",
+    "producer_id": 3,
+    "score": 9.68421,
+    "serving": "2人份",
+    "square_image": {
+        "ident": "b069d9e900894df8b42a07630090f609_308w_308h.png",
+        "max_height": 4096,
+        "max_width": 4096,
+        "original_height": 308,
+        "original_width": 308,
+        "url_pattern": "http:\u002F\u002Fi1.chuimg.com\u002Fb069d9e900894df8b42a07630090f609_308w_308h.png@2o_50sh_1pr_1l_{width}w_{height}h_1c_1e_90q_1wh.{format}"
+    },
+    "square_video": {
+        "height": 720,
+        "ident": "11acec58329a11e8b9100242ac120002_720w_720h.m4v",
+        "url": "http:\u002F\u002Fi3.chuimg.com\u002F11acec58329a11e8b9100242ac120002_720w_720h.m4v",
+        "width": 720
+    },
+    "status": 1,
+    "step_video": {
+        "height": 720,
+        "ident": "11acec58329a11e8b9100242ac120002_720w_720h.m4v",
+        "url": "http:\u002F\u002Fi3.chuimg.com\u002F11acec58329a11e8b9100242ac120002_720w_720h.m4v",
+        "width": 720
+    },
+    "steps": [{
+        "text": "口蘑去蒂，洗净待用。",
+        "tips": ""
+    }, {
+        "text": "锅内倒入5ml油，把口蘑凹面向下，盖上锅盖小火煎1分钟。",
+        "tips": ""
+    }, {
+        "text": "打开锅盖，把口蘑翻面，继续小火慢慢煎。直到凹下去的地方出满汤汁，撒少许盐和黑胡椒调味。",
+        "tips": ""
+    }, {
+        "text": "烤箱版做法：\n处理好的口蘑摆在烤盘上，撒盐和黑胡椒，烤箱200度，烤15分钟。",
+        "tips": ""
+    }],
+    "time_consuming": "约10-15分钟",
+    "tips": "烤箱版做法：\n处理好的口蘑摆在烤盘上，撒盐和黑胡椒，烤箱200度，烤15分钟。",
+    "update_time": "2019-06-21 19:08:38",
+    "url": "https:\u002F\u002Flanfanapp.com\u002Frecipe\u002F101\u002F"
+
+}

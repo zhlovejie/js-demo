@@ -1,6 +1,7 @@
-//const fileApi = require('./file')
-const jsdom = require('jsdom')
-const { JSDOM } = jsdom
+/**
+ * 采集 菜谱和评论数据 持久化到 MongoDB
+ */
+const JSDOM = require('jsdom').JSDOM
 const db = require('./db')
 
 function runRecipe(url){
@@ -8,31 +9,25 @@ function runRecipe(url){
   .then((dom) => {
     const __NUXT__ = dom.window['__NUXT__']
     const __recipe = __NUXT__.data[0].recipe
+    __recipe.n_collects = Number(__recipe.n_collects)
     return __recipe
   })
   .catch((err)=>{
-    //console.log(err)
     return null
   });
 }
 
 async function initRecipe(){
-  db.action.changeCollection('recipe')
-  await db()
+  let dbInstance = await db()
   for(let i = 0;i<4000;i++){
     let recipe = await runRecipe(`http://lanfanapp.com/recipe/${i}/`)
     if(recipe){
       console.log(`${recipe.id} --${recipe.name}`)
-      let item = await db.recipe.findOne({name:recipe.name,id:recipe.id})
-      if(!item){
-        await db.action.add(recipe)
-      }
+      await dbInstance.collection('recipe').insertOne(recipe)
     }
   }
-  console.log('over...')
-  process.exit()
+  console.log('菜谱采集完毕...')
 }
-
 
 function runNote(url){
   return JSDOM.fromURL(url, {runScripts: "dangerously"})
@@ -41,28 +36,23 @@ function runNote(url){
     return __NUXT__.data[0]
   })
   .catch((err)=>{
-    //console.log(err)
     return null
   });
 }
 
 async function initNote(){
-  db.action.changeCollection('note')
-  await db()
-
-  for(let i = 30000;i<31000;i++){
+  let dbInstance = await db()
+  for(let i = 0;i<4000;i++){
     let note = await runNote(`http://lanfanapp.com/note/${i}/`)
     if(note){
       console.log(`currentIndex:${i} -- ${note.note.user.id} -- ${note.note.user.name}`)
-      await db.action.add(note)
-      // let item = await db.recipe.findOne({name:recipe.name,id:recipe.id})
-      // if(!item){
-      //   await db.recipe.add(recipe)
-      // }
+      await dbInstance.collection('note').insertOne(note)
     }
   }
-  console.log('over...')
+  console.log('评论采集完毕...')
   process.exit()
 }
-
-initNote()
+//采集菜谱
+//initRecipe()
+//采集评论
+//initNote()
