@@ -1,6 +1,6 @@
 {
   "searchCategory":{
-    "dishes":[
+    "allCategory":[
       {
         "name":"菜式",
         "tags":[
@@ -82,16 +82,20 @@
         "level":7
       }
     ],
-    "hot":[
-      {"name":"红烧肉","kw":"红烧肉","hot":true},
-      {"name":"可乐鸡翅","kw":"可乐鸡翅","hot":true},
-      {"name":"糖醋排骨","kw":"排骨","hot":true},
-      {"name":"炒饭","kw":"饭","hot":true},
-      {"name":"炒面","kw":"面","hot":true},
-      {"name":"土豆","kw":"土豆","hot":true},
-      {"name":"鱼","kw":"鱼","hot":true},
-      {"name":"鸡胸肉","kw":"鸡","hot":true},
-      {"name":"沙拉","kw":"沙拉","hot":true}
+    "hotCategory":[
+      {"name":"红烧肉","kw":"红烧肉"},
+      {"name":"可乐鸡翅","kw":"可乐鸡翅"},
+      {"name":"糖醋排骨","kw":"排骨"},
+      {"name":"炒饭","kw":"饭"},
+      {"name":"炒面","kw":"面"},
+      {"name":"土豆","kw":"土豆"},
+      {"name":"鱼","kw":"鱼"},
+      {"name":"鸡胸肉","kw":"鸡"},
+      {"name":"沙拉","kw":"沙拉"}
+    ],
+    //'今日推荐','早餐达人','新手不翻车','家常菜能手','懒人一锅出','主食控','爱吃肉肉','甜食至上'
+    "customCategory":[
+      {name:""}
     ]
   }
 }
