@@ -31,7 +31,7 @@ async function getNextSequenceValue(sequenceName,sequenceValue=1){
   let update = {$inc:{sequence_value:sequenceValue}}
   let options = {returnOriginal:false}
   let result = await dbInstance.collection('counters').findOneAndUpdate(filter,update,options)
-  console.log(result)
+  //console.log(result)
   return result.value.sequence_value;
 }
 
