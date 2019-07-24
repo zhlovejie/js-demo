@@ -3,10 +3,11 @@
   <div class="container">
     <SearchBarShow @touched="searchBarTouched"></SearchBarShow>
     <div class="main-container">
-
-      <div class="nav-bar-wrapper">
-        <cube-scroll-nav-bar :current="current" :labels="navLabels" @change="changeHandler" />
-      </div>
+      <transition enter-active-class="animated slideInDown" leave-active-class="animated slideOutUp height-0">
+        <div class="nav-bar-wrapper" v-show="showNavBar">
+          <cube-scroll-nav-bar ref="scrollNavBar" :current="current" :labels="navLabels" @change="changeHandler" />
+        </div>
+      </transition>
 
       <div class="main-wrapper">
         <cube-slide
@@ -15,41 +16,38 @@
           :loop="false"
           :autoPlay="false"
           :threshold="0.1"
-          @change="slideChange">
+          @change="slideChange"
+          >
           <cube-slide-item v-for="(item, index) in navLabels" :key="index">
-            <RecipeList :recipeTag="allRecipeCategory.customCategory[index]" :render="index === currentIndex"></RecipeList>
+            <RecipeList 
+              :recipeTag="allRecipeCategory.customCategory[index]" 
+              :isFirst="index === 0" 
+              :render="index === currentIndex"
+              @slideDirectionAction="slideDirectionAction"
+            ></RecipeList>
           </cube-slide-item>
           <div slot="dots"></div>
         </cube-slide>
       </div>
-
-      <!-- <div class="recipe-top6-wrapper"></div>
-
-      <div class="recipe-weektop10-wrapper"></div>
-
-      <div class="recipe-list"></div> -->
     </div>
-    
   </div>
-
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import SearchBar from '@/components/SearchBar.vue'
 import SearchBarShow from '@/components/SearchBarShow.vue'
 import RecipeList from '@/components/RecipeList.vue'
 
 export default {
-  inject:['$http'],
   name: 'home',
   data:function(){
     return {
       navLabels:[],
       current:'',
       currentIndex:0,
-      allRecipeCategory:{}
+      allRecipeCategory:{},
+      showNavBar:true
     }
   },
   created:function(){
@@ -69,8 +67,15 @@ export default {
     } 
   },
   methods:{
+    slideDirectionAction:function(direction){
+      //console.log('slideDirectionAction called....'+direction)
+      this.showNavBar = direction === 'down' ? true : false
+      if(this.showNavBar){
+        this.$nextTick(() => this.$refs.scrollNavBar.refresh())
+      }
+    },
     searchBarTouched:function(){
-      console.log('1111')
+      this.$router.push('/search')
     },
     changeHandler:function(label){
       console.log(arguments)
@@ -79,6 +84,9 @@ export default {
     slideChange:function(index){
       console.log(arguments)
       this.current = this.navLabels[index]
+
+      this.showNavBar = true
+      this.$nextTick(() => this.$refs.scrollNavBar.refresh())
     }
   },
   components: {
@@ -135,4 +143,76 @@ img,video {
   background-color: #171717;
   border-radius: 30px;
 }
+
+.height-0{height: 0;overflow: hidden;}
+
+.animated {
+  -webkit-animation-duration: .2s;
+  animation-duration: .2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInDown {
+  -webkit-animation-name: slideInDown;
+  animation-name: slideInDown;
+}
+
+@-webkit-keyframes slideOutUp {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.slideOutUp {
+  -webkit-animation-name: slideOutUp;
+  animation-name: slideOutUp;
+}
+
 </style>

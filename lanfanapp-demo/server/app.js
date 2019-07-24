@@ -2,10 +2,11 @@ const path = require('path')
 const recipe = require('./models/m_recipe')
 const express = require('express')
 const app = express()
+const fs = require('fs')
 
 app.set('port', process.env.PORT || 3000)
 //设置静态文件
-app.use('/public',express.static(path.join(__dirname,'public')))
+app.use('/public/image',express.static(path.join(__dirname,'public/image/')))
 
 app.all('*',(req, res, next) =>{
   res.header("Access-Control-Allow-Origin", "*");
@@ -13,6 +14,29 @@ app.all('*',(req, res, next) =>{
   next()
 })
 
+app.get('*.mp4',(req, res, next) =>{
+  let fullPath = path.join(__dirname,req.path)
+  if(fs.existsSync(fullPath)){
+    var readStream = fs.createReadStream(fullPath)
+    let head = {
+      'Accept-Ranges': 'bytes',
+      'Content-Type': 'video/mp4'
+    }
+    res.writeHead(200, head)
+    //流传输结束事件
+    readStream.on('close', () => res.end());
+    readStream.pipe(res)
+  }else{
+    next(new Error('file not exists.'))
+  }
+})
+
+app.get('/getRecipe/:id',(req, res, next) => {
+  let id = req.params.id
+  recipe.getRecipe(id)
+  .then(result =>res.send(result))
+  .catch(err =>next(err))
+})
 
 app.get('/getRecipe',(req, res, next) => {
   let tagName = req.query.tagName

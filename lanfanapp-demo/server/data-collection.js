@@ -8,9 +8,6 @@ const axios = require('axios')
 const fs = require('fs')
 const path = require('path')
 
-
-
-
 function getFilePath(fileName,type){
   let baseFilePath = path.resolve(__dirname,'./public/'+(type === 'image' ? 'image' : 'vedio'))
   return path.join(baseFilePath,fileName)

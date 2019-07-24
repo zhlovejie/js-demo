@@ -19,15 +19,20 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #search-bar-show{
   position: fixed;
-  left: 20px;
-  right: 20px;
+  width: 100%;
   background-color: #fff;
   padding: 5px 0;
+  z-index: 100;
 }
-.search-bar{display: flex;justify-content: center;align-items: center;}
+.search-bar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+}
 .search-input-wrap{
   position: relative;
   flex-grow:1;

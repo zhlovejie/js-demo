@@ -1,12 +1,12 @@
 import Vue from 'vue'
-import tools from './utils/tools'
+import * as $tools from './utils/tools'
 import './cube-ui'
 import './swiper'
 import App from './App.vue'
 import store from './store'
 import router from './router'
 import axios from 'axios'
-
+import lodash from 'lodash'
 
 Vue.config.productionTip = false
 const $http = axios.create({
@@ -15,13 +15,11 @@ const $http = axios.create({
   //headers: {'X-Custom-Header': 'foobar'}
 });
 
-
+Vue.prototype.$http = $http
+Vue.prototype.$tools = $tools
+Vue.prototype.$_ = lodash
 
 new Vue({
-  provide:{
-    $http:$http,
-    $tools:tools
-  },
   store,
   router,
   render: h => h(App)

@@ -7,48 +7,50 @@
           <input type="text" class="search-input" v-model="searchText" placeholder="搜索食材、菜谱">
           <i class="cubeic-icon cubeic-wrong" v-show="hasSearchText"  @click="clearSearchText"></i>
         </div>
-        <button class="search-btn-cancel">取消</button>
+        <button class="search-btn-cancel" @click="searchCancel">取消</button>
       </div>
     </div>
     
     <div id="search-content">
-      <div class="search-history">
-        <div class="__header">
-          <div class="__title">最近搜索历史 </div><span>清空</span>
+      <div class="search-recommend" v-if="!hasSearchText">
+        <div class="search-history">
+          <div class="__header">
+            <div class="__title">最近搜索历史 </div><span>清空</span>
+          </div>
+          <ul class="__tags">
+            <li class="__tag" v-for="(tag,index) in category.historyCategory" :key="index">
+              {{tag.name}}
+            </li>
+          </ul>
         </div>
-        <ul class="__tags">
-          <li class="__tag" v-for="(tag,index) in category.historyCategory" :key="index">
-            {{tag.name}}
-          </li>
-        </ul>
-      </div>
-      <div class="search-category">
-        <div class="__header">
-          <div class="__title">分类 </div><span>全部分类</span>
+        <div class="search-category">
+          <div class="__header">
+            <div class="__title">分类 </div><span>全部分类</span>
+          </div>
+          <ul class="__tags">
+            <li class="__tag" v-for="(tag,index) in category.allCategory" :key="index">
+              {{tag.name}}
+            </li>
+          </ul>
         </div>
-        <ul class="__tags">
-          <li class="__tag" v-for="(tag,index) in category.allCategory" :key="index">
-            {{tag.name}}
-          </li>
-        </ul>
-      </div>
-      <div class="search-hot">
-        <div class="__header">
-          <div class="__title">热门搜索</div>
+        <div class="search-hot">
+          <div class="__header">
+            <div class="__title">热门搜索</div>
+          </div>
+          <ul class="__tags">
+            <li class="__tag" v-for="(tag,index) in category.hotCategory" :key="index">
+              {{tag.name}}
+            </li>
+          </ul>
         </div>
-        <ul class="__tags">
-          <li class="__tag" v-for="(tag,index) in category.hotCategory" :key="index">
-            {{tag.name}}
-          </li>
-        </ul>
       </div>
+      <div class="search-" v-if="hasSearchText"></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  inject:['$http'],
   data:function(){
     return {
       searchText:'',
@@ -61,17 +63,14 @@ export default {
   },
   created:function(){
     let that = this
-    console.log(this)
-    this.category = this.$http('allRecipeCategory').then(function(result){
-      
-      let data = result.data
-      that.category = result.data
-      // that.category.allCategory = data.allCategory
-      // that.category.hotCategory = data.hotCategory
-      // that.category.historyCategory = data.historyCategory
-
-      console.log(that)
-    })
+    let _allRecipeCategory = window.localStorage.getItem('allRecipeCategory')
+    if(_allRecipeCategory){
+      that.category = JSON.parse(_allRecipeCategory)
+    }else{
+      this.category = this.$http('allRecipeCategory').then(function(result){
+        that.category = result.data
+      })
+    }
   },
   computed:{
     hasSearchText:function(){
@@ -81,20 +80,27 @@ export default {
   methods:{
     clearSearchText:function(){
       this.searchText = ''
+    },
+    searchCancel:function(){
+      this.$router.go(-1)
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .search-wrapper{
   position: absolute;
-  height: 100%;
-  width: 100%;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
   background-color: #fff;
 }
 #search-header{
-  position: fixed;left: 10px;right: 10px;
+  position: fixed;
+  left: 20px;
+  right: 20px;
   background-color: #fff;
   padding: 5px 0;
 }
@@ -130,14 +136,13 @@ export default {
   margin-left: 10px;
 }
 
-
 #search-content{
   position: absolute;
-  left: 10px;
+  left: 0;
   top: 48px;
-  right: 20px;
+  right: 0;
   bottom: 0;
-   
+  font-size: 14px;
 }
 
 .__header{
@@ -162,9 +167,8 @@ export default {
 .__tags .__tag{
   padding: 10px 15px;
   text-align: center;
-  margin-right: 10px;
+  margin: 0 15px 15px 0;
   background-color: #f5f5f5;
   border-radius: 30px;
-  margin-bottom: 10px;
 }
 </style>
