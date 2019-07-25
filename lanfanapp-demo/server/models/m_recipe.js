@@ -9,7 +9,7 @@ async function getRecipeTop(topSize=6){
   let query = {}
   let options = {
     sort:{update_time:-1,score:-1,n_collects:-1},
-    projection:{id:1,name:1,name_adj:1,"square_image":1,"square_video":1},
+    projection:{id:1,name:1,name_adj:1,"time_consuming":1,"difficulty_text":1,"square_image":1,"square_video":1},
     limit:topSize
   }
 
@@ -39,7 +39,7 @@ async function getRecipeWeekTop(topSize=10){
 
   let options = {
     sort:{score:-1,n_collects:-1},
-    projection:{id:1,name:1,name_adj:1,"square_image":1,"square_video":1},
+    projection:{id:1,name:1,name_adj:1,"time_consuming":1,"difficulty_text":1,"square_image":1,"square_video":1},
     limit:topSize
   }
 
@@ -62,7 +62,7 @@ async function getAllRecipe(currentPage=1,pageSize=10){
 
   let query = {}
   let options = {
-    projection:{id:1,name:1,name_adj:1,n_collects:1,"square_image":1,"square_video":1},
+    projection:{id:1,name:1,name_adj:1,n_collects:1,"time_consuming":1,"difficulty_text":1,"square_image":1,"square_video":1},
     sort:{n_collects:-1},
     limit:pageSize,
     skip:_currentPage * pageSize
@@ -94,7 +94,7 @@ async function searchRecipe(keyWord,currentPage=1,pageSize=10){
 
   let query = {$or:orKeyWords}
   let options = {
-    projection:{id:1,name:1,name_adj:1,n_collects:1,"square_image":1,"square_video":1},
+    projection:{id:1,name:1,name_adj:1,n_collects:1,"time_consuming":1,"difficulty_text":1,"square_image":1,"square_video":1},
     sort:{n_collects:-1},
     limit:pageSize,
     skip:_currentPage * pageSize

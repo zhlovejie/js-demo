@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import RecipeDetail from './views/RecipeDetail.vue'
-import SearchBar from './views/SearchBar.vue'
+import Search from './views/Search.vue'
+import SearchResult from './views/SearchResult.vue'
+import Category from './views/Category.vue'
 
 Vue.use(Router)
 
@@ -21,7 +23,17 @@ export default new Router({
     {
       path:'/search',
       name:'search',
-      component:SearchBar
+      component:Search
+    },
+    {
+      path:'/search/:kw',
+      name:'searchResult',
+      component:SearchResult
+    },
+    {
+      path:'/category',
+      name:'category',
+      component:Category
     },
     {
       path: '/about',

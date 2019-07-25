@@ -70,9 +70,7 @@ export default {
   
   created:function(){
     if(!this.toast){
-      this.toast = this.$createToast({
-        txt: '加载中...'
-      })
+      this.toast = this.$createToast()
     }
     this.toast.show()
     let id = this.$route.params.id
@@ -83,6 +81,7 @@ export default {
       that.toast.hide()
     }).catch(err => {
       console.log(err.message)
+      that.toast.hide()
     })
   },
   methods:{
@@ -113,7 +112,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 img,video {
   -webkit-touch-callout: none
 }

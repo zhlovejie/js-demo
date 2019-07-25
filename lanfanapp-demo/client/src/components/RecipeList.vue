@@ -78,6 +78,10 @@ export default {
   },
   methods: {
     renderAction(){
+      if(!this.toast){
+        this.toast = this.$createToast()
+      }
+      this.toast.show()
       let that = this
       if(this.render){
         this.$http('getRecipe',{params:{tagName:this.recipeTag.name}}).then(function(result){
@@ -86,6 +90,7 @@ export default {
           that.recipe10.currentPage = result.data.recipe_10.currentPage
           that.recipe10.pageSize = result.data.recipe_10.pageSize
           that.recipe10.repiceList = result.data.recipe_10.recipeList
+          that.toast.hide()
         })
       }
     },
