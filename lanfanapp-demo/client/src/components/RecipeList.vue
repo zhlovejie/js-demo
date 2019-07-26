@@ -70,7 +70,8 @@ export default {
       },
       prevsSrollPosY:0,
       scrollPosY:0,
-      isTrigger:false
+      isTrigger:false,
+      isFirstRendered:true
     };
   },
   created:function(){
@@ -78,12 +79,14 @@ export default {
   },
   methods: {
     renderAction(){
-      if(!this.toast){
-        this.toast = this.$createToast()
-      }
-      this.toast.show()
+      
+      
       let that = this
-      if(this.render){
+      if(this.render && this.isFirstRendered){
+        if(!this.toast){
+          this.toast = this.$createToast()
+        }
+        this.toast.show()
         this.$http('getRecipe',{params:{tagName:this.recipeTag.name}}).then(function(result){
           that.recipeTop6 = result.data.recipe_top6 || []
           that.recipeWeekTop10 = result.data.recipe_weektop10 || []
@@ -91,6 +94,7 @@ export default {
           that.recipe10.pageSize = result.data.recipe_10.pageSize
           that.recipe10.repiceList = result.data.recipe_10.recipeList
           that.toast.hide()
+          that.isFirstRendered = false
         })
       }
     },

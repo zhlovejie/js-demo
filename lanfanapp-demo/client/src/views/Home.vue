@@ -30,7 +30,10 @@
         </cube-slide>
       </div>
     </div>
+
+    <router-view name="search" class="new-page"></router-view>
   </div>
+  
 </template>
 
 <script>
@@ -217,6 +220,17 @@ img,video {-webkit-touch-callout: none;}
 .slideOutUp {
   -webkit-animation-name: slideOutUp;
   animation-name: slideOutUp;
+}
+
+
+.new-page{
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 101;
+  background-color: #fff;
 }
 
 </style>

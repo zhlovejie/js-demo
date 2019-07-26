@@ -1,4 +1,5 @@
 <template>
+  <div class="search-wrapper1111">
   <div class="search-wrapper">
     <SearchBar
       :searchText.sync="searchText" 
@@ -20,7 +21,7 @@
         </div>
         <div class="search-category" v-if="allCategory.length > 0">
           <div class="__header">
-            <div class="__title">分类 </div><span>全部分类</span>
+            <div class="__title">分类 </div><span @click="showCategory">全部分类</span>
           </div>
           <ul class="__tags">
             <li class="__tag" v-for="(tag,index) in allCategory" :key="index" @click="tapItemHandler(tag)">
@@ -49,6 +50,7 @@
       
     </div>
     
+  </div>
   </div>
 </template>
 
@@ -153,6 +155,9 @@ export default {
       }
       window.localStorage.setItem('allRecipeCategory',JSON.stringify(_allRecipeCategory))
       this.historyCategory = []
+    },
+    showCategory:function(){
+      this.$router.push('/category')
     }
   },
   components: {

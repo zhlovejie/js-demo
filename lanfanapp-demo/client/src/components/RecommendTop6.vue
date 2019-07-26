@@ -20,8 +20,8 @@ export default {
   data:function(){
     return {
       swiperOption:{
-        slidesPerView: 1.1,
-        spaceBetween: 15,
+        slidesPerView: 1.2,
+        spaceBetween: 20,
         slidesOffsetBefore:20,
         slidesOffsetAfter:20
       }
