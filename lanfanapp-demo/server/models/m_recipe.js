@@ -27,7 +27,7 @@ async function getRecipeTop(topSize=6){
  */
 async function getRecipeWeekTop(topSize=10){
   let formatStr = 'YYYY-MM-DD HH:mm:ss'
-  let statTime = moment().subtract(7,'days').format(formatStr)
+  let statTime = moment().subtract(180,'days').format(formatStr)
   let endTime = moment().format(formatStr)
 
   let query = {
@@ -142,6 +142,14 @@ async function getRecipeFromTag(tagName){
   }
 }
 
+async function getRecommends(){
+  let result = await Promise.all([getRecipeTop(), getRecipeWeekTop()])
+  return {
+    recipe_top6 : result[0], 
+    recipe_weektop10 : result[1]
+  }
+}
+
 
 
 module.exports = {
@@ -151,7 +159,8 @@ module.exports = {
   searchRecipe,
   allRecipeCategory,
   getRecipe,
-  getRecipeFromTag
+  getRecipeFromTag,
+  getRecommends
 }
 //allRecipeCategory()
 

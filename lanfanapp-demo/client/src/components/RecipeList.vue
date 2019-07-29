@@ -5,18 +5,17 @@
       :scroll-events="['scroll','scroll-end']" 
       @scroll="onScrollHandle" 
       @scroll-end = "onScrollEndHandle" 
-      :data="recipe10.repiceList"
+      :data="recipeList"
       :options="scrollConfig"
-      @pulling-down="onPullingDown"
       @pulling-up="onPullingUp">
       
-        <RecommendTop6 v-if="recipeTop6.length > 0" :repiceList="recipeTop6" @tap="tapHandler"></RecommendTop6>
-        <RecommendWeekTop10 v-if="recipeWeekTop10.length > 0" :repiceList="recipeWeekTop10" @tap="tapHandler"></RecommendWeekTop10>
+        <RecommendTop6 v-if="recipeTop6.length > 0" :recipeList="recipeTop6" @tap="tapHandler"></RecommendTop6>
+        <RecommendWeekTop10 v-if="recipeWeekTop10.length > 0" :recipeList="recipeWeekTop10" @tap="tapHandler"></RecommendWeekTop10>
         
-        <div class="recommend-recipe-wrapper" v-if="recipe10.repiceList.length > 0">
+        <div class="recommend-recipe-wrapper" v-if="recipeList.length > 0">
           <div class="__header" v-if="isFirst">更多美味</div>
           <ul class="repice-list-content">
-            <li class="repice-list-item" v-for="(item,index) in recipe10.repiceList" :key="index" @click="tapHandler(item,index)">
+            <li class="repice-list-item" v-for="(item,index) in recipeList" :key="index" @click="tapHandler(item,index)">
               <img class="repice-list-item-img" :src="formatImgURL(item.square_image)" style="width:100%;height:auto;" alt="">
               <div class="repice-list-item-desc">
                 <div class="name-adj">{{item.name_adj}}</div>
@@ -47,11 +46,6 @@ export default {
   data:function() {
     return {
       scrollConfig: {
-        pullDownRefresh: {
-          threshold: 90,
-          stop: 50,
-          txt: '刷新成功',
-        },
         pullUpLoad: {
           threshold: 100,
           txt: {
@@ -63,40 +57,46 @@ export default {
       initHeight: `${window.innerHeight - 90}px`,
       recipeTop6:[],
       recipeWeekTop10:[],
-      recipe10:{
-        currentPage:1,
-        pageSize:10,
-        repiceList:[]
-      },
+      currentPage:1,
+      recipeList:[],
       prevsSrollPosY:0,
       scrollPosY:0,
       isTrigger:false,
-      isFirstRendered:true
+      isFirstRendered:true,
+      noMore:false
     };
   },
   created:function(){
+    if(!this.toast) this.toast = this.$createToast()
     this.renderAction()
   },
   methods: {
     renderAction(){
-      
-      
       let that = this
+      let _url = ''
       if(this.render && this.isFirstRendered){
-        if(!this.toast){
-          this.toast = this.$createToast()
-        }
         this.toast.show()
-        this.$http('getRecipe',{params:{tagName:this.recipeTag.name}}).then(function(result){
-          that.recipeTop6 = result.data.recipe_top6 || []
-          that.recipeWeekTop10 = result.data.recipe_weektop10 || []
-          that.recipe10.currentPage = result.data.recipe_10.currentPage
-          that.recipe10.pageSize = result.data.recipe_10.pageSize
-          that.recipe10.repiceList = result.data.recipe_10.recipeList
+        if(this.recipeTag.name === '今日推荐'){
+          this.getRecommends()
+          _url = `getAllRecipe/${this.currentPage}`
+        }else{
+          _url = `search/${encodeURIComponent(this.recipeTag.kw)}/${this.currentPage}`
+        }
+        this.$http(_url).then(function(result){
+          that.currentPage = Number(result.data.currentPage)
+          that.recipeList = result.data.recipeList
           that.toast.hide()
           that.isFirstRendered = false
         })
       }
+    },
+    getRecommends:function(callback){
+      let that = this
+      this.$http('getRecommends').then(function(result){
+        that.recipeTop6 = result.data.recipe_top6 || []
+        that.recipeWeekTop10 = result.data.recipe_weektop10 || []
+        callback && callback()
+      })
     },
     tapHandler:function(item,index){
       this.$router.push(`/recipe/${item.id}`)
@@ -106,49 +106,48 @@ export default {
     },
     onScrollHandle:function(pos){
       this.scrollPosY = pos.y
-      if(this.prevsSrollPosY >= this.scrollPosY){
-        if(!this.isTrigger){
-          this.$emit('slideDirectionAction','up')
-        }
-      }else{
-        if(!this.isTrigger){
-          this.$emit('slideDirectionAction','down')
-        }
+      let offset = Math.abs(this.prevsSrollPosY - this.scrollPosY)
+      if(!this.isTrigger && offset > 10){
+        this.$emit('slideDirectionAction',(this.prevsSrollPosY >= this.scrollPosY) ? 'up' : 'down')
+        this.isTrigger = true
       }
-      this.isTrigger = true
     },
     onScrollEndHandle:function(){
       this.prevsSrollPosY = this.scrollPosY
       this.isTrigger = false
     },
-    onPullingDown() {
-      this.loadMatch('down');
-    },
-    loadMatch(type) {
-
-      // setTimeout(() => { // 这里用setTimeout模拟数据请求,真实情况下你需要向接口请求数据
-      //   if (Math.random() > 0.5) {
-      //     const match = [];
-      //     for (let index = 5; index > 0; index--) {
-      //       match.push(this.repiceList.recipe_10[index]);
-      //     }
-      //     if (type === 'down') {
-      //       this.repiceList.recipe_10.unshift(...match);
-      //     } else if (type === 'up') {
-      //       this.repiceList.recipe_10 = this.repiceList.recipe_10.concat(match);
-      //     }
-      //   } else {
-      //     this.$refs.scroll.forceUpdate();
-      //     if (type === 'up') { // 上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
-      //       setTimeout(() => {
-      //         this.$refs.scroll.scroll.scrollBy(0, 64, 800);
-      //       }, 1000);
-      //     }
-      //   }
-      // }, 1000);
-    },
     onPullingUp() {
-      this.loadMatch('up');
+      let that = this
+      if(that.noMore) {
+        that.$refs.scroll.forceUpdate()
+        setTimeout(function(){
+          that.$refs.scroll.scroll.scrollBy(0, 64, 500);
+        },500)
+        return 
+      }
+
+      let _url = ''
+      if(this.recipeTag.name === '今日推荐'){
+        _url = `getAllRecipe/${this.currentPage + 1}`
+      }else{
+        _url = `search/${encodeURIComponent(this.recipeTag.kw)}/${this.currentPage + 1}`
+      }
+
+      this.$http(_url).then(result =>{
+        if(result.data.recipeList.length === 0) {
+          that.$refs.scroll.forceUpdate()
+          setTimeout(function(){
+            that.$refs.scroll.scroll.scrollBy(0, 64, 500);
+            that.noMore = true
+          },500)
+          return
+        }
+        that.recipeList = that.recipeList.concat (result.data.recipeList)
+        that.currentPage = result.data.currentPage
+        that.$refs.scroll.forceUpdate()
+      }).catch(err => {
+        console.log(err.message)
+      })
     }
   },
   mounted:function(){

@@ -31,6 +31,14 @@ app.get('*.mp4',(req, res, next) =>{
   }
 })
 
+//日推荐和周推荐
+app.get('/getRecommends',(req, res, next) => {
+  let id = req.params.id
+  recipe.getRecommends()
+  .then(result =>res.send(result))
+  .catch(err =>next(err))
+})
+
 app.get('/getRecipe/:id',(req, res, next) => {
   let id = req.params.id
   recipe.getRecipe(id)

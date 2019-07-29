@@ -1,9 +1,16 @@
 <template>
   <div id="category-wrapper">
+    <SearchBar 
+      :showBackButton="true" 
+      :disabled="true" 
+      :value="''" 
+      @touchedBack="touchedBack"
+    ></SearchBar>
   <cube-scroll-nav
     :side="true"
     :data="category"
-    :current="current"
+    :current="current" 
+    class="cube-scroll-nav-wrapper"
   >
     <cube-scroll-nav-panel
       v-for="item in category"
@@ -24,6 +31,8 @@
 </template>
 
 <script>
+import SearchBar from '@/components/SearchBar.vue'
+
 export default {
   data:function(){
     return {
@@ -43,7 +52,13 @@ export default {
     },
     tapItemHandler:function(item){
       this.$router.push(`/search/${encodeURIComponent(item.kw)}`)
+    },
+    touchedBack:function(){
+      this.$router.go(-1)
     }
+  },
+  components: {
+    SearchBar
   }
 }
 </script>
@@ -55,6 +70,10 @@ export default {
     left: 0;
     bottom: 0;
     width: 100%;
+
+    .cube-scroll-nav-wrapper{
+      top:48px;
+    }
     // 侧边栏
     .cube-sticky-fixed{
       .cube-scroll-nav-bar{

@@ -15,11 +15,32 @@ export default new Router({
       name: 'home',
       component: Home,
       children:[
-        {path:'',component: Home},
-        {path:'search',components: {search:Search}},
-        {path:'category',components: {search:Category}},
-        {path:'search/:kw',components: {search:SearchResult}},
-        {path:'recipe/:id',components: {search:RecipeDetail}}
+        {
+          path:'search',
+          components: {
+            search:Search
+          },
+          children:[
+            {
+              path:'category',
+              components: {
+                searchPage:Category
+              }
+            },
+            {
+              path:':kw',
+              components: {
+                searchPage:SearchResult
+              }
+            }
+          ]
+        },
+        {
+          path:'recipe/:id',
+          components: {
+            recipeDetail:RecipeDetail
+          }
+        }
       ]
     },
     // {

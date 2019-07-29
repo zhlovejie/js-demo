@@ -1,56 +1,60 @@
 <template>
-  <div class="search-wrapper1111">
-  <div class="search-wrapper">
-    <SearchBar
-      :searchText.sync="searchText" 
-      :showCancelButton="true" 
-      @touchedCancel="searchCancel"
-    ></SearchBar>
+  <div class="search-container">
+    <div class="search-wrapper">
+      <SearchBar
+        :searchText.sync="searchText" 
+        :showCancelButton="true" 
+        @touchedCancel="searchCancel"
+      ></SearchBar>
 
-    <div id="search-content">
-      <div class="search-recommend" v-if="!hasSearchText">
-        <div class="search-history" v-if="historyCategory.length > 0">
-          <div class="__header">
-            <div class="__title">最近搜索历史 </div><span @click="clearHistoryCategory">清空</span>
+      <div id="search-content">
+        <div class="search-recommend" v-if="!hasSearchText">
+          <div class="search-history" v-if="historyCategory.length > 0">
+            <div class="__header">
+              <div class="__title">最近搜索历史 </div><span @click="clearHistoryCategory">清空</span>
+            </div>
+            <ul class="__tags">
+              <li class="__tag" v-for="(tag,index) in historyCategory" :key="index" @click="tapItemHandler(tag)">
+                {{tag.name}}
+              </li>
+            </ul>
           </div>
-          <ul class="__tags">
-            <li class="__tag" v-for="(tag,index) in historyCategory" :key="index" @click="tapItemHandler(tag)">
-              {{tag.name}}
-            </li>
+          <div class="search-category" v-if="allCategory.length > 0">
+            <div class="__header">
+              <div class="__title">分类 </div><span @click="showCategory">全部分类</span>
+            </div>
+            <ul class="__tags">
+              <li class="__tag" v-for="(tag,index) in allCategory" :key="index" @click="tapItemHandler(tag)">
+                {{tag.name}}
+              </li>
+            </ul>
+          </div>
+          <div class="search-hot" v-if="hotCategory.length > 0">
+            <div class="__header">
+              <div class="__title">热门搜索</div>
+            </div>
+            <ul class="__tags">
+              <li class="__tag" v-for="(tag,index) in hotCategory" :key="index" @click="tapItemHandler(tag)">
+                {{tag.name}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="search-result" v-if="hasSearchText">
+          <p v-if="searchError" class="searchError">未搜索到 <span>{{searchText}}</span> 内容</p>
+          <p v-if="!searchError" class="searchKW" @click="tapItemHandler(searchText)">直接搜索 <span>{{searchText}}</span></p>
+          <ul v-if="searchResult.length > 0" class="search-result-list">
+            <li v-for="(item,index) in searchResult" :key="index" @click="tapItemHandler({name:item.name,kw:item.name})">{{item.name}}</li>
           </ul>
         </div>
-        <div class="search-category" v-if="allCategory.length > 0">
-          <div class="__header">
-            <div class="__title">分类 </div><span @click="showCategory">全部分类</span>
-          </div>
-          <ul class="__tags">
-            <li class="__tag" v-for="(tag,index) in allCategory" :key="index" @click="tapItemHandler(tag)">
-              {{tag.name}}
-            </li>
-          </ul>
-        </div>
-        <div class="search-hot" v-if="hotCategory.length > 0">
-          <div class="__header">
-            <div class="__title">热门搜索</div>
-          </div>
-          <ul class="__tags">
-            <li class="__tag" v-for="(tag,index) in hotCategory" :key="index" @click="tapItemHandler(tag)">
-              {{tag.name}}
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="search-result" v-if="hasSearchText">
-        <p v-if="searchError" class="searchError">未搜索到 <span>{{searchText}}</span> 内容</p>
-        <p v-if="!searchError" class="searchKW" @click="tapItemHandler(searchText)">直接搜索 <span>{{searchText}}</span></p>
-        <ul v-if="searchResult.length > 0" class="search-result-list">
-          <li v-for="(item,index) in searchResult" :key="index" @click="tapItemHandler({name:item.name,kw:item.name})">{{item.name}}</li>
-        </ul>
+        
       </div>
       
     </div>
-    
-  </div>
+
+    <transition :name="transitionName">
+      <router-view name="searchPage" class="new-page"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -65,9 +69,11 @@ export default {
       searchError:false,
       allCategory:[],
       hotCategory:[],
-      historyCategory:[]
+      historyCategory:[],
+      transitionName:'slide-left'
     }
   },
+  
   created:function(){
     this.debouncedSearchAction = _.debounce(this.searchAction, 500)
     let that = this
@@ -157,7 +163,7 @@ export default {
       this.historyCategory = []
     },
     showCategory:function(){
-      this.$router.push('/category')
+      this.$router.push('/search/category')
     }
   },
   components: {

@@ -2,7 +2,7 @@
   <div id="recommend-week-top10-wrapper" >
     <div class="__header">本周人气榜单</div>
     <swiper :options="swiperOption" ref="mySwiperWeekTop10" @tap="tapHandler">
-      <swiper-slide v-for="(item, index) in repiceList" :data-index="index" class="repice-list-item" :key="index">
+      <swiper-slide v-for="(item, index) in recipeList" :data-index="index" class="repice-list-item" :key="index">
           <img class="repice-list-item-img" :data-index="index" :src="formatImgURL(item.square_image)" :style="recipeWeekTop10Image" >
           <p class="repice-list-item-text" :data-index="index">No.{{index + 1}}·{{item.name_adj}}{{item.name}}</p>
       </swiper-slide>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props:['repiceList'],
+  props:['recipeList'],
   data:function(){
     return {
       swiperOption:{
@@ -42,7 +42,7 @@ export default {
     },
     tapHandler:function(event){
       let _index = Number(event.srcElement.dataset['index'])
-      this.$emit('tap',this.repiceList[_index],_index)
+      this.$emit('tap',this.recipeList[_index],_index)
     }
   }
 }

@@ -6,7 +6,21 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import axios from 'axios'
-import lodash from 'lodash'
+import lodash from 'lodash' 
+
+// flexable()
+
+// function flexable(){
+//   const d = document,w = window
+//   function setFontSize(){
+//     let htmlWidth = d.documentElement.clientWidth || d.body.clientWidth 
+//     htmlWidth = htmlWidth > 720 ? 720 : htmlWidth
+//     let htmlDom   = d.getElementsByTagName('html')[0]
+//     htmlDom.style.fontSize = (htmlWidth / 10) + 'px'
+//   }
+//   setFontSize()
+//   w.addEventListener('resize',setFontSize)
+// }
 
 Vue.config.productionTip = false
 const $http = axios.create({

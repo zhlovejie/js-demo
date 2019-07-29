@@ -2,8 +2,9 @@
   <!-- <SearchBar></SearchBar> -->
   <div class="container">
     <SearchBar @touched="searchBarTouched" :disabled="true"></SearchBar>
+    
     <div class="main-container">
-      <transition enter-active-class="animated slideInDown" leave-active-class="animated slideOutUp height-0">
+      <transition enter-active-class="animated-short slideInDown" leave-active-class="animated-short slideOutUp height-0">
         <div class="nav-bar-wrapper" v-show="showNavBar">
           <cube-scroll-nav-bar ref="scrollNavBar" :current="current" :labels="navLabels" @change="changeHandler" />
         </div>
@@ -15,7 +16,7 @@
           :initialIndex="currentIndex"
           :loop="false"
           :autoPlay="false"
-          :threshold="0.1"
+          :threshold="0.2"
           @change="slideChange"
           >
           <cube-slide-item v-for="(item, index) in navLabels" :key="index">
@@ -31,9 +32,15 @@
       </div>
     </div>
 
-    <router-view name="search" class="new-page"></router-view>
+    <transition name="fade">
+      <router-view name="search" class="new-page"></router-view>
+    </transition>
+
+    <transition :name="transitionName">
+      <router-view name="recipeDetail" class="new-page"></router-view>
+    </transition>
+
   </div>
-  
 </template>
 
 <script>
@@ -50,7 +57,11 @@ export default {
       current:'',
       currentIndex:0,
       allRecipeCategory:{},
-      showNavBar:true
+      showNavBar:true,
+      enterActiveClass:"",
+      leaveActiveClass:"",
+      pageStack:['/'],
+      transitionName:'slide-left'
     }
   },
   created:function(){
@@ -69,6 +80,13 @@ export default {
       })
     } 
   },
+  watch:{
+    '$route':function (to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    }
+  },
   methods:{
     slideDirectionAction:function(direction){
       //console.log('slideDirectionAction called....'+direction)
@@ -85,11 +103,11 @@ export default {
       this.currentIndex = this.navLabels.findIndex(txt => txt === label)
     },
     slideChange:function(index){
-      console.log(arguments)
       this.current = this.navLabels[index]
-
-      this.showNavBar = true
-      this.$nextTick(() => this.$refs.scrollNavBar.refresh())
+      if(!this.showNavBar){
+        this.showNavBar = true
+        this.$nextTick(() => this.$refs.scrollNavBar.refresh())
+      }
     }
   },
   components: {
@@ -153,75 +171,12 @@ img,video {-webkit-touch-callout: none;}
 
 .height-0{height: 0;overflow: hidden;}
 
-.animated {
+.animated-short {
   -webkit-animation-duration: .2s;
   animation-duration: .2s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
-
-@-webkit-keyframes slideInDown {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes slideInDown {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.slideInDown {
-  -webkit-animation-name: slideInDown;
-  animation-name: slideInDown;
-}
-
-@-webkit-keyframes slideOutUp {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    visibility: hidden;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-}
-
-@keyframes slideOutUp {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    visibility: hidden;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-}
-
-.slideOutUp {
-  -webkit-animation-name: slideOutUp;
-  animation-name: slideOutUp;
-}
-
 
 .new-page{
   position: fixed;
@@ -231,6 +186,27 @@ img,video {-webkit-touch-callout: none;}
   bottom: 0;
   z-index: 101;
   background-color: #fff;
+  overflow-y: scroll;
+  overflow-x:hidden;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s ease;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
+.new-page{
+  transition: all .3s cubic-bezier(.55,0,.1,1);
+}
+.slide-left-enter, .slide-right-leave-active {
+  opacity: 1;
+  -webkit-transform: translate(100%, 0);
+  transform: translate(100%, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+  opacity: 1;
+  -webkit-transform: translate(100%, 0);
+  transform: translate(100%, 0);
+}
 </style>

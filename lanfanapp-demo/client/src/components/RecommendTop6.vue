@@ -1,7 +1,7 @@
 <template>
   <div class="recommend-top6-wrapper">
     <swiper :options="swiperOption" ref="mySwiper" @tap="tapHandler">
-      <swiper-slide v-for="(item, index) in repiceList" class="repice-list-item" :key="index">
+      <swiper-slide v-for="(item, index) in recipeList" class="repice-list-item" :key="index">
         <img class="repice-list-item-img" :src="formatImgURL(item.square_image)" style="width:100%;height:auto;" alt="">
         <div class="repice-list-item-desc">
           <div class="name-adj">{{item.name_adj}}</div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props:['repiceList'],
+  props:['recipeList'],
   data:function(){
     return {
       swiperOption:{
@@ -37,7 +37,7 @@ export default {
       return this.$tools.formatImageUrl(url)
     },
     tapHandler:function(){
-      this.$emit('tap',this.repiceList[this.swiper.realIndex],this.swiper.realIndex)
+      this.$emit('tap',this.recipeList[this.swiper.realIndex],this.swiper.realIndex)
     }
   }
 }

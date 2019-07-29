@@ -1,4 +1,6 @@
 <template>
+  <div class="recipe-detail-container">
+    <i class="btn-close cubeic-close" @click="closeHandler"></i>
   <article class="container" v-if="recipeList.length > 0">
     <div id="recipe-media-container" class="recipe-media-container" >
         <video 
@@ -56,6 +58,7 @@
         <p class="tips-content" >{{recipe.tips}}</p>
     </section>
   </article>
+  </div>
 </template>
 
 <script>
@@ -85,6 +88,9 @@ export default {
     })
   },
   methods:{
+    closeHandler:function(){
+      this.$router.go(-1)
+    },
     formatImgURL(url){
       console.log(url)
       return this.$tools.formatImageUrl(url)
@@ -115,6 +121,17 @@ export default {
 <style scoped>
 img,video {
   -webkit-touch-callout: none
+}
+
+.btn-close{
+  font-weight: bold;
+  padding: 5px;
+  color: #fff;
+  font-size: 22px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999999;
 }
 
 .container {
