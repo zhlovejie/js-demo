@@ -1,13 +1,15 @@
 <template>
   <div class="recommend-top6-wrapper">
     <swiper :options="swiperOption" ref="mySwiper" @tap="tapHandler">
-      <swiper-slide v-for="(item, index) in recipeList" class="repice-list-item" :key="index">
-        <img class="repice-list-item-img" :src="formatImgURL(item.square_image)" style="width:100%;height:auto;" alt="">
-        <div class="repice-list-item-desc">
-          <div class="name-adj">{{item.name_adj}}</div>
-          <div class="name">{{item.name}}</div>
+      <swiper-slide v-for="(item, index) in recipeList"  :key="index">
+        <div class="repice-list-item">
+          <img class="repice-list-item-img" :src="formatImgURL(item.square_image)" style="width:100%;height:auto;" alt="">
+          <div class="repice-list-item-desc">
+            <div class="name-adj">{{item.name_adj}}</div>
+            <div class="name">{{item.name}}</div>
+          </div>
+          <i class="cubeic-icon cubeic-like"></i>
         </div>
-        <i class="cubeic-icon cubeic-like"></i>
         <p class="repice-list-item-text">{{item.name_adj}}{{item.name}}</p>
       </swiper-slide>
     </swiper>
@@ -21,7 +23,7 @@ export default {
     return {
       swiperOption:{
         slidesPerView: 1.2,
-        spaceBetween: 20,
+        spaceBetween: 15,
         slidesOffsetBefore:20,
         slidesOffsetAfter:20
       }
@@ -43,6 +45,18 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+.repice-list-item-text {
+  color: #333;
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size:15px;
+  font-weight: bold;
+  padding-top: 15px;
+}
+
   .repice-list-item {
     width: 100%;
     height: 0;
@@ -90,21 +104,12 @@ export default {
     .cubeic-icon {
       position: absolute;
       right: 20px;
-      bottom: 60px;
-      font-size: 200%;
+      bottom: 20px;
+      font-size: 32px;
       color: #fff;
     }
 
-    .repice-list-item-text {
-      position: absolute;
-      left: 0;
-      bottom: 10px;
-      color: #171717;
-      width: 95%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+    
   }
 </style>
 

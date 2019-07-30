@@ -6,6 +6,13 @@ import Search from './views/Search.vue'
 import SearchResult from './views/SearchResult.vue'
 import Category from './views/Category.vue'
 
+import Note from './views/Note.vue'
+import Notification from './views/Notification.vue'
+import Person from './views/Person.vue'
+
+
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -38,11 +45,32 @@ export default new Router({
         {
           path:'recipe/:id',
           components: {
-            recipeDetail:RecipeDetail
+            defaultView:RecipeDetail
+          }
+        },
+        {
+          path:'/note',
+          name:'note',
+          components: {
+            topPageView:Note
+          }
+        },
+        {
+          path:'/notification',
+          name:'notification',
+          components: {
+            topPageView:Notification
+          }
+        },
+        {
+          path:'/me',
+          name:'me',
+          components: {
+            topPageView:Person
           }
         }
       ]
-    },
+    }
     // {
     //   path:'/recipe/:id',
     //   name:'recipe',

@@ -127,7 +127,7 @@ img,video {
   font-weight: bold;
   padding: 5px;
   color: #fff;
-  font-size: 22px;
+  font-size: 30px;
   position: absolute;
   top: 10px;
   left: 10px;

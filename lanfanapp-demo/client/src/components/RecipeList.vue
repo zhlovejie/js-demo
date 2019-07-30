@@ -54,7 +54,7 @@ export default {
           },
         },
       },
-      initHeight: `${window.innerHeight - 90}px`,
+      initHeight: `${window.innerHeight - 48}px`,
       recipeTop6:[],
       recipeWeekTop10:[],
       currentPage:1,
@@ -165,9 +165,11 @@ export default {
 .recipe-list-wrapper{
   margin: 0;
   .__header{
-    font-size: 19px;
-    color: #171717;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
     padding: 10px 0 10px 20px;
+    margin-top: 20px;
   }
 }
 .recommend-recipe-wrapper{
@@ -231,11 +233,13 @@ export default {
       position: absolute;
       left: 0;
       bottom: 10px;
-      color: #171717;
+      color: #333;
       width: 95%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      font-size: 15px;
+      font-weight: bold;
     }
   }
 }

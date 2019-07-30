@@ -3,13 +3,13 @@
   <div class="container">
     <SearchBar @touched="searchBarTouched" :disabled="true"></SearchBar>
     
-    <div class="main-container">
-      <transition enter-active-class="animated-short slideInDown" leave-active-class="animated-short slideOutUp height-0">
-        <div class="nav-bar-wrapper" v-show="showNavBar">
-          <cube-scroll-nav-bar ref="scrollNavBar" :current="current" :labels="navLabels" @change="changeHandler" />
-        </div>
-      </transition>
+    <transition name="fade">
+      <div class="nav-bar-wrapper" v-show="showNavBar">
+        <cube-scroll-nav-bar ref="scrollNavBar" :current="current" :labels="navLabels" @change="changeHandler" />
+      </div>
+    </transition>
 
+    <div class="main-container">
       <div class="main-wrapper">
         <cube-slide
           :data="navLabels"
@@ -17,7 +17,8 @@
           :loop="false"
           :autoPlay="false"
           :threshold="0.2"
-          @change="slideChange"
+          @change="slideChange" 
+          :class="{'cube-slide-wrapper-padding':showNavBar}"
           >
           <cube-slide-item v-for="(item, index) in navLabels" :key="index">
             <RecipeList 
@@ -32,13 +33,17 @@
       </div>
     </div>
 
+    <TabBar></TabBar>
+
     <transition name="fade">
       <router-view name="search" class="new-page"></router-view>
     </transition>
 
     <transition :name="transitionName">
-      <router-view name="recipeDetail" class="new-page"></router-view>
+      <router-view name="defaultView" class="new-page"></router-view>
     </transition>
+
+    <router-view name="topPageView" class="top-page-view"></router-view>
 
   </div>
 </template>
@@ -48,6 +53,7 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 import SearchBar from '@/components/SearchBar.vue'
 import RecipeList from '@/components/RecipeList.vue'
+import TabBar from '@/components/TabBar.vue'
 
 export default {
   name: 'home',
@@ -113,7 +119,8 @@ export default {
   components: {
     HelloWorld,
     SearchBar,
-    RecipeList
+    RecipeList,
+    TabBar
   }
 }
 </script>
@@ -129,6 +136,8 @@ body {
     text-size-adjust: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    max-width: 640px;
+    margin: auto;
 }
 
 img,video {-webkit-touch-callout: none;}
@@ -139,24 +148,35 @@ img,video {-webkit-touch-callout: none;}
 }
 .main-container{
   position: absolute;
-  top:46px;
+  top:45px;
   left:0;
   right: 0;
-  bottom: 0;
+  bottom: 40px;
   z-index: 1;
+  .cube-slide-wrapper-padding{
+    padding-top: 40px;
+  }
 }
 .nav-bar-wrapper{
-  padding: 5px 0;
+  position: fixed;
+  top: 45px;
+  left: 0px;
+  right: 0px;
+  z-index: 10;
+  background-color: #fff;
+
   .cube-scroll-nav-bar-items{
     .cube-scroll-nav-bar-item{
       display: inline-block;
       vertical-align: top;
-      padding: 10px 15px;
-      color: #a8a8a8;
+      padding: 8px 15px;
+      color: #888;
+      font-size: 14px;
+      font-weight: bold;
     }
     .cube-scroll-nav-bar-item_active{
       color: #fff;
-      background-color: #171717;
+      background-color: #333;
       border-radius: 30px;
     }
     .cube-scroll-nav-bar-item:first-child{
@@ -186,8 +206,22 @@ img,video {-webkit-touch-callout: none;}
   bottom: 0;
   z-index: 101;
   background-color: #fff;
-  overflow-y: scroll;
-  overflow-x:hidden;
+  -webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+	overflow-y: scroll;
+}
+
+.top-page-view{
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  z-index: 20;
+  background-color: #fff;
+  -webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+	overflow-y: scroll;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -209,4 +243,6 @@ img,video {-webkit-touch-callout: none;}
   -webkit-transform: translate(100%, 0);
   transform: translate(100%, 0);
 }
+
+
 </style>

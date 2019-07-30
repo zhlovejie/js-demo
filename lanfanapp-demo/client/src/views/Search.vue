@@ -42,9 +42,9 @@
         </div>
         <div class="search-result" v-if="hasSearchText">
           <p v-if="searchError" class="searchError">未搜索到 <span>{{searchText}}</span> 内容</p>
-          <p v-if="!searchError" class="searchKW" @click="tapItemHandler(searchText)">直接搜索 <span>{{searchText}}</span></p>
-          <ul v-if="searchResult.length > 0" class="search-result-list">
-            <li v-for="(item,index) in searchResult" :key="index" @click="tapItemHandler({name:item.name,kw:item.name})">{{item.name}}</li>
+          <p v-if="!searchError" class="searchKW" @click="tapItemHandler({name:searchText,kw:searchText})">直接搜索 <span>{{searchText}}</span></p>
+          <ul v-if="searchResult.length > 0" class="search-result-list border-top-1px">
+            <li class="border-bottom-1px" v-for="(item,index) in searchResult" :key="index" @click="tapItemHandler({name:item.name,kw:item.name})">{{item.name}}</li>
           </ul>
         </div>
         
@@ -146,9 +146,8 @@ export default {
         window.localStorage.setItem('allRecipeCategory',JSON.stringify(_allRecipeCategory))
         this.historyCategory = _allRecipeCategory.historyCategory
 
-        this.$router.push(`/search/${encodeURIComponent(newItem.kw)}`)
-
         window.localStorage.setItem('lastSearchItem',JSON.stringify(newItem))
+        this.$router.push(`/search/${encodeURIComponent(newItem.kw)}`)
     },
     clearHistoryCategory:function(){
       let _allRecipeCategory = {}
@@ -193,16 +192,25 @@ export default {
   top: 48px;
   right: 0;
   bottom: 0;
-  font-size: 14px;
-
+  
   .__header{
     display: flex;
     align-items: center;
-    color: #a8a8a8;
+    color: #888;
     line-height: 40px;
-
-    .__title{flex-grow: 1;color: #999;}
-    span{padding: 0 20px;}
+    font-size: 15px;
+    font-weight: bold;
+    .__title{
+      flex-grow: 1;
+      color: #888;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    span{
+      padding: 0 20px;
+      font-size: 15px;
+      font-weight: bold;
+    }
   }
 
 
@@ -216,24 +224,33 @@ export default {
       margin: 0 15px 15px 0;
       background-color: #f5f5f5;
       border-radius: 30px;
+      white-space: nowrap;
+      color:#333;
+      font-size: 15px;
+      font-weight: bold;
     }
   }
 }
 
 
 .search-result{
-  margin: 0 20px;
+  
 
   .searchError,.searchKW{
     color: #999;
     padding: 15px 0;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: bold;
     span{color: #333;padding: 0 10px;}
   }
 
   .search-result-list{
-    color: #333;
-    li {padding: 15px 0;}
+    li {
+      color: #333;
+      padding: 15px 0;
+      font-size: 15px;
+      font-weight: bold;
+    }
   }
 }
 

@@ -61,11 +61,13 @@ export default {
     }
     .repice-list-item-text{
       width: 100%;
-      padding: 5px 0;
+      padding-top: 10px;
       overflow: auto;
       text-overflow: initial;
       white-space: normal;
       line-height: 1.2;
+      font-size:15px;
+      font-weight: bold;
     }
   }
 }

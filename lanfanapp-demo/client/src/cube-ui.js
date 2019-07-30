@@ -11,7 +11,7 @@ import {
   // Loading,
   // Tip,
   // Toolbar,
-  // TabBar,
+   TabBar,
   // TabPanels,
   // form
   // Checkbox,
@@ -19,7 +19,7 @@ import {
   // Checker,
   // Radio,
   // RadioGroup,
-  // Input,
+   Input,
   // Textarea,
   // Select,
   // Switch,
@@ -45,7 +45,7 @@ import {
   //IndexList,
   //Swipe,
   //Sticky,
-  //ScrollNav,
+  ScrollNav,
   ScrollNavBar
 } from 'cube-ui'
 
@@ -53,14 +53,14 @@ import {
 // Vue.use(Loading)
 // Vue.use(Tip)
 // Vue.use(Toolbar)
-// Vue.use(TabBar)
+ Vue.use(TabBar)
 // Vue.use(TabPanels)
 // Vue.use(Checkbox)
 // Vue.use(CheckboxGroup)
 // Vue.use(Checker)
 // Vue.use(Radio)
 // Vue.use(RadioGroup)
-// Vue.use(Input)
+ Vue.use(Input)
 // Vue.use(Textarea)
 // Vue.use(Select)
 // Vue.use(Switch)
@@ -84,5 +84,5 @@ import {
 // Vue.use(IndexList)
 // Vue.use(Swipe)
 // Vue.use(Sticky)
-// Vue.use(ScrollNav)
+ Vue.use(ScrollNav)
  Vue.use(ScrollNavBar)

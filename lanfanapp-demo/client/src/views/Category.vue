@@ -10,7 +10,8 @@
     :side="true"
     :data="category"
     :current="current" 
-    class="cube-scroll-nav-wrapper"
+    class="cube-scroll-nav-wrapper" 
+    ref="myScrollNav"
   >
     <cube-scroll-nav-panel
       v-for="item in category"
@@ -44,6 +45,9 @@ export default {
     this.category = this.getCategory()
     this.current = this.category[0].name
   },
+  mounted:function(){
+    this.$nextTick(() => this.$refs.myScrollNav.refresh())
+  },
   methods:{
     getCategory:function(){
       let allRecipeCategoryStr = window.localStorage.getItem('allRecipeCategory')
@@ -72,14 +76,14 @@ export default {
     width: 100%;
 
     .cube-scroll-nav-wrapper{
-      top:48px;
+      top:45px;
+      background-color: #f5f5f5;
     }
     // 侧边栏
-    .cube-sticky-fixed{
+    .cube-sticky-fixed,.cube-sticky-ele{
       .cube-scroll-nav-bar{
-        background-color: #f6f6f6;
+        background-color: #f5f5f5;
         color: #aaa;
-
         .cube-scroll-nav-bar-item{
           padding: 10px 0;
           span{
@@ -98,18 +102,21 @@ export default {
     }
     //内容
     .cube-scroll-nav-panel{
-      
+      background-color: #fff;
       ul{
         display: flex;
         flex-wrap: wrap;
         margin-left: 20px;
-        
+        background-color: #fff;
         li{
           padding: 10px 15px;
           text-align: center;
           margin: 0 15px 15px 0;
           background-color: #f5f5f5;
           border-radius: 30px;
+          font-size: 16px;
+          font-weight: bold;
+          white-space: nowrap;
         }
       }
     }

@@ -3,9 +3,19 @@
     <div class="search-bar" >
       <i class="cubeic-icon cubeic-back" v-if="showBackButton" @click="touchedBack"></i>
       <div class="search-input-wrap" @click="touched">
-        <i class="cubeic-icon cubeic-search"></i>
-        <input type="text" class="search-input" :disabled="disabled" v-model="searchText" :placeholder="placeholder">
-        <i class="cubeic-icon cubeic-wrong" v-show="hasSearchText"  @click="touchedClearSearchText"></i>
+        <!-- <i class="cubeic-icon cubeic-search"></i> -->
+        <cube-input 
+          v-model="searchText" 
+          :readonly="disabled" 
+          :placeholder="placeholder" 
+          :clearable="true" 
+        >
+          <template v-slot:prepend>
+            <i class="cubeic-icon cubeic-search"></i>
+          </template>
+        </cube-input>
+        <!-- <input type="text" class="search-input" :disabled="disabled" v-model="searchText" :placeholder="placeholder">
+        <i class="cubeic-icon cubeic-wrong" v-show="hasSearchText"  @click="touchedClearSearchText"></i> -->
       </div>
       <button class="search-btn-cancel" v-if="showCancelButton" @click="touchedCancel">取消</button>
     </div>
@@ -75,11 +85,13 @@ export default {
 #search-bar-show{
   position: fixed;
   background-color: #fff;
-  padding: 5px 0;
-  z-index: 100;
+  z-index: 10;
   top: 0;
   left: 0;
   right: 0;
+  height: 40px;
+  overflow: hidden;
+
   .cubeic-icon{color: #a8a8a8;}
   .search-bar{
     display: flex;
@@ -95,36 +107,40 @@ export default {
     }
     .cubeic-search{
       position: relative;
-      top: 0;
+      font-size: 16px;
     }
     .cubeic-wrong{padding: 0 5px 0 10px;}
     
     .search-btn-cancel{
       color: #2bbbee;
-      font-size: 17px;
+      font-size: 16px;
       background: none;
       border: none;
       outline: none;
-      padding: 5px 10px 5px 20px;
-      margin-left: 10px;
+      padding: 0;
+      margin: 0 0 0 10px;
+      white-space: nowrap;
     }
 
     .search-input-wrap{
       position: relative;
       flex-grow:1;
-      padding: 10px 15px;
-      background-color: #f5f5f5;
-      border-radius: 40px;
+      
       display: flex;
 
-      .search-input{
-        outline: none;
-        padding: 0 5px;
-        color: #333;
+      .cube-input{
+        flex:1;
+        padding: 0 15px;
+        border-radius: 50px;
         background-color: #f5f5f5;
-        flex-grow:1;
-        font-size: initial;
-        line-height:normal
+      }
+      .cube-input:after{
+        border:none;
+      }
+
+      .cube-input-field{
+        font-weight: bold;
+        font-size: 15px;
       }
     }
   }
