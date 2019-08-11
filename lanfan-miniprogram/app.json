@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/recipe_detail/recipe_detail",
+    "pages/note/note",
+    "pages/search/search",
+    "pages/user/user"
+  ],
+  "window": {
+    "backgroundColor": "#fff",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "懒饭",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#dbdbdb",
+    "selectedColor": "#515151",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./images/home.png",
+        "selectedIconPath": "./images/home-selected.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "./images/user.png",
+        "selectedIconPath": "./images/user-selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

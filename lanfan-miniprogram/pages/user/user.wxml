@@ -1,0 +1,52 @@
+<!--miniprogram/pages/user/user.wxml-->
+<view class="user-container">
+    <view class="userinfo">
+      <image src="{{avatarUrl}}" style="width:64px;height:64px;" mode="widthFix" class="userinfo-logo"></image>
+      <button 
+        open-type="getUserInfo" 
+        bindgetuserinfo="onGetUserInfo"
+        class="userinfo-avatar"
+      >
+      {{logged ? userInfo.nickName : '请点击登录'}}</button>
+    </view>
+
+    <view class="user-main" wx:if="{{logged}}">
+      <view class="swiper-tab-bar">
+        <view class="swiper-tab-bar-wrap">
+          <view wx:for="{{tags}}" wx:key="index" bindtap="tagIndexChange" data-index="{{index}}" class="tag-item {{index === currentIndex ? 'current' : ''}}" wx:for-item="tag">{{tag}}</view>
+        </view>
+      </view>
+      <swiper class="swiper-container" style="height:{{swiperHeight}}px;" current="{{currentIndex}}" bindchange="swiperChange">
+        <swiper-item class="swiper-item">
+        <scroll-view scroll-y class="scroll-view-wrap" style="height: {{swiperHeight}}px;"  bindscrolltolower="scrolltolowerHandler">
+          <block wx:if="{{recipeHistory.length > 0}}">
+            <view class="recipe-wrap">
+              <view data-id="{{recipe._id}}" bindtap="gotoRecipeDetail" class="recipe-item {{(index % 2 == 0) ? 'even' : ''}}" wx:for="{{recipeHistory}}" wx:for-item="recipe" wx:key="recipe._id">
+                <image src="cloud://bean-wx-cloud-d1f8d.6265-bean-wx-cloud-d1f8d-1259220695/images/recipe/{{recipe.image}}" lazy-load="true" class="recipe-item-image" mode="widthFix" style="width:{{width}}px;"/>
+                <text style="width:{{width}}px;" class="recipe-item-text">{{recipe.name}}</text>
+              </view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="no-data-tips">暂无看过的菜谱</view>
+          </block>
+        </scroll-view>
+        </swiper-item>
+        <swiper-item class="swiper-item">
+        <scroll-view scroll-y class="scroll-view-wrap" style="height: {{swiperHeight}}px;"  bindscrolltolower="scrolltolowerHandler">
+          <block wx:if="{{recipeCollect.length > 0}}">
+            <view class="recipe-wrap">
+              <view data-id="{{recipe._id}}" bindtap="gotoRecipeDetail"  class="recipe-item {{(index % 2 == 0) ? 'even' : ''}}" wx:for="{{recipeCollect}}" wx:for-item="recipe" wx:key="recipe._id">
+              <image src="cloud://bean-wx-cloud-d1f8d.6265-bean-wx-cloud-d1f8d-1259220695/images/recipe/{{recipe.image}}" lazy-load="true" class="recipe-item-image" mode="widthFix" style="width:{{width}}px;"/>
+              <text class="recipe-item-text">{{recipe.name}}</text>
+              </view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="no-data-tips">暂无收藏的菜谱</view>
+          </block>
+        </scroll-view>
+        </swiper-item>
+      </swiper>
+    </view>
+</view>

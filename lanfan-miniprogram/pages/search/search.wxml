@@ -1,0 +1,37 @@
+<!--miniprogram/pages/search/search.wxml-->
+<view class="search-container">
+  <view class="search-bar">
+    <view class="search-bar-inner">
+      <view class="search-bar-main">
+        <icon type="search" class="icon icon-search" size="16" />
+        <input placeholder="搜索菜谱、食材" confirm-type="search" focus="true" bindinput="inputHandler" bindfocus="inputHandler" bindconfirm="inputHandler" bindblur="inputHandler" value="{{inputValue}}"></input>
+        <icon wx:if="{{hasInput}}" type="clear" class="icon icon-clear" size="16" bindtap="clearInput" />
+      </view>
+      <view class="search-cancel" bindtap="backHandler">取消</view>
+    </view>
+  </view>
+
+  <view class="search-content">
+    <view class="search-recommend-wrap" wx:if="{{!searchTrigger}}">
+      <view class="search-item" wx:if="{{searchHistory.length > 0}}">
+        <view class="search-item-title">最近搜索历史</view>
+        <view class="search-item-wrap">
+          <view class="search-item-tag" wx:for="{{searchHistory}}" wx:key="item.name" data-index="{{index}}" data-source="searchHistory" bindtap="searchFromTag">{{item.name}}</view>
+        </view>
+      </view>
+      <view class="search-item" wx:if="{{searchRecommendTag.length > 0}}">
+        <view class="search-item-title">热门搜索</view>
+        <view class="search-item-wrap">
+          <view class="search-item-tag" wx:for="{{searchRecommendTag}}" wx:key="item.name" data-index="{{index}}" data-source="searchRecommendTag" bindtap="searchFromTag">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="search-result-wrap" wx:if="{{searchTrigger}}">
+      <view class="no-result-tips" wx:if="{{noResult}}">{{noResultTips}}</view>
+      <view class="search-result" wx:if="{{!noResult}}">
+        <view wx:for="{{searchResult}}" wx:key="item._id" data-id="{{item._id}}" data-name="{{item.name}}" bindtap="searchFromResult" class="search-result-item">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+</view>

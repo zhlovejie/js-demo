@@ -1,0 +1,76 @@
+ <block 
+  wx:if="{{recipeList.length > 0}}" 
+  wx:for="{{recipeList}}" 
+  wx:for-item="recipe" 
+  wx:key="index"
+ >
+  <scroll-view scroll-y scroll-top="{{scrollTop}}" style="height: {{mediaHeight}}px;" bindscroll="scrollHandler" >
+  <view class="container">
+    <view class="recipe-media-container" style="height:{{mediaHeight}}px;">
+      <video autoplay="true"  loop="true" id="recipe-video"  src="cloud://bean-wx-cloud-d1f8d.6265-bean-wx-cloud-d1f8d-1259220695/videos/{{recipe.video.ident}}" class="recipe-video" poster="cloud://bean-wx-cloud-d1f8d.6265-bean-wx-cloud-d1f8d-1259220695/images/recipe/{{recipe.image.ident}}"  controls object-fit="fill" binderror="videoErrorHandler"></video>
+
+      <view class="recipe-video-tips" wx:if="{{showVideoTips}}">
+      <image src="../../images/up.png" mode="widthFix" style="width:32px;"></image>
+      <text>用料 制作步骤</text>
+      </view>
+      <view class="recipe-collect" catchtap="addCollect">
+      <image src="{{isCollect ? collectImg : unCollectImg}}" class="recipe-collect-image" mode="widthFix" style="display:block;width:100%;"/>
+      </view>
+
+      
+      <button
+        class="btn-share-recipe" 
+        open-type="share" 
+      >分享给好友</button>
+
+    </view>
+    <view class="recipe-name title-1" >{{recipe.name}} {{recipe.name_adj}}</view>
+    <view class="recipe-meta" >
+        <view class="recipe-meta-item time">
+            <view class="meta-name"  >时间</view>
+            <view class="meta-value" >{{recipe.time_consuming}}</view>
+        </view>
+        <view class="recipe-meta-item difficulty">
+            <view class="meta-name" >难度</view>
+            <view class="meta-value" >
+                {{recipe.difficulty_text}}
+            </view>
+        </view>
+        <view class="recipe-meta-item score" wx:if="{{recipe.score > 1}}">
+            <view class="meta-name" >评分</view>
+            <view class="meta-value" >
+            {{scoreValue}}
+            <view class="score-icons">
+                  <image src="../../images/star-selected-unable.png" wx:for="{{scoreImgList}}" wx:key="index" mode="widthFix" style="width:16px;"></image>
+              </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="viewider" ></view>
+    <view class="recipe-ings" >
+        <h3 class="title-2" >用料<span class="recipe-serving" wx:if="{{recipe.serving.length > 0}}">{{recipe.serving}}</span></h3>
+        <view class="ing-group" wx:for="{{recipe.ing_groups}}" wx:key="index">
+            <view class="ing-group-name" wx:if="{{item.name.length > 0}}">{{item.name}}</view>
+            <view class="ing-group-ings" >
+                <view class="ing" wx:for="{{item.ings}}" wx:for-item="ing" wx:key="index">
+                    <view class="ing-name" >{{ing.name}}</view>
+                    <view class="ing-unit" >{{ing.amount}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="steps" >
+        <view class="step" wx:for="{{recipe.steps}}" wx:for-item="step" wx:key="index">
+            <h4 class="title-2" >制作步骤 {{index + 1}}</h4>
+            <image src="cloud://bean-wx-cloud-d1f8d.6265-bean-wx-cloud-d1f8d-1259220695/images/recipe/{{step.image.ident}}" mode="widthFix" lazy-load="true" style="width:{{mediaWidth - 50}}px;display:block;margin:0 auto;border-radius: 6px;"></image>
+            <view class="step-text" >{{step.text}}</view>
+        </view>
+    </view>
+    <view class="tips" wx:if="{{recipe.tips.length > 0}}">
+        <h3 class="title-2" >诀窍点</h3>
+        <p class="tips-content" >{{recipe.tips}}</p>
+    </view>
+  </view>
+  </scroll-view>
+ </block>

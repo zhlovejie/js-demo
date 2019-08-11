@@ -1,0 +1,93 @@
+<!--index.wxml-->
+<view class="container">
+  <scroll-view scroll-y style="height: {{scrollHeight}}px;"  bindscrolltolower="scrolltolowerHandler">
+    <view class="search-bar" bindtap="gotoSearchPage">
+      <view class="search-bar-inner">
+        <view class="search-bar-main">
+          <icon type="search" class="icon icon-search" size="16" />
+          <input placeholder="搜索菜谱、食材" confirm-type="search" disabled="disabled"></input>
+        </view>
+      </view>
+    </view>
+
+    <block wx:if="{{recipteTop6.length > 0}}">
+    <swiper class="swiper-container" style="height:{{swiperTop6Height}}px"  display-multiple-items="1.1" previous-margin="20px" next-margin="20px">
+      <block wx:for="{{recipteTop6}}" wx:key="item.id">
+        <swiper-item class="swiper-item" data-id="{{item._id}}" bindtap="gotoRecipeDetail">
+        <view class="swiper-item-wrapper">
+          <image src="cloud://bean-wx-cloud-d1f8d.6265-bean-wx-cloud-d1f8d-1259220695/images/recipe/{{item.square_image.ident}}" lazy-load="true" class="slide-image" style="width:{{swiperTop6Height}}px;" mode="widthFix"/>
+          <view class="item-info">
+            <view class="item-name-adj">{{item.name_adj}}</view>
+            <view class="item-name">{{item.name}}</view>
+          </view>
+          <view class="item-collect" data-id="{{item._id}}" data-source="recipteTop6" catchtap="addCollect">
+          <image src="{{item.isCollect ? collectImg : unCollectImg}}" class="item-collect-image" mode="widthFix"></image>
+          </view>
+        </view>
+        <view class="item-outer-name">{{item.name_adj}}{{item.name}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
+    </block>
+
+
+    <block wx:if="{{recipteWeekTop10.length > 0}}">
+    <view class="__title">本周人气榜单</view>
+    <swiper class="swiper-container" style="height:{{swiperWeekTopH}}px"  display-multiple-items="2" previous-margin="20px" next-margin="20px">
+      <block wx:for="{{recipteWeekTop10}}" wx:key="item.id">
+        <swiper-item class="swiper-item"  data-id="{{item._id}}" bindtap="gotoRecipeDetail">
+        <view class="swiper-item-wrapper">
+          <image lazy-load="true"         src="cloud://bean-wx-cloud-d1f8d.6265-bean-wx-cloud-d1f8d-1259220695/images/recipe/{{item.image.ident}}" class="slide-image" style="width:{{swiperWeekTopW}}px;" mode="widthFix"/>
+          
+        </view>
+        <view class="item-outer-name">{{item.name}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
+    </block>
+
+
+    <block wx:if="recipeList.length > 0">
+      <view class="__title">更多美食</view>
+      <view class="recipe-more-list">
+        <block wx:for="{{recipeList}}" wx:key="item.id">
+        <view class="recipe-item" style="width:{{recipeListWidth}}px;" data-id="{{item._id}}" bindtap="gotoRecipeDetail">
+          <image  lazy-load="true" src="cloud://bean-wx-cloud-d1f8d.6265-bean-wx-cloud-d1f8d-1259220695/images/recipe/{{item.square_image.ident}}" class="recipe-item-image" style="width:{{recipeListWidth}}px;" mode="widthFix"/>
+          <view class="recipe-item-info">
+            <view class="recipe-item-name-adj">{{item.name_adj}}</view>
+            <view class="recipe-item-name">{{item.name}}</view>
+          </view>
+          <view class="recipe-item-collect" data-id="{{item._id}}" data-source="recipeList"  catchtap="addCollect">
+          <image src="{{item.isCollect ? collectImg : unCollectImg}}" class="recipe-item-collect-image"></image>
+          </view>
+          <text class="recipe-item-text">{{item.name_adj}}{{item.name}}</text>
+        </view>
+        </block>
+      </view>
+    </block>
+    
+  </scroll-view>
+
+
+
+
+
+
+  <!-- 用户 openid -->
+  <!-- <view class="userinfo">
+    <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+    ></button>
+    <view>
+      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+    </view>
+  </view> -->
+
+  
+  
+
+
+</view>

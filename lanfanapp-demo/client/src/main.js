@@ -27,7 +27,7 @@ document.querySelector("meta[name='viewport']")["content"] = "width=device-width
 
 Vue.config.productionTip = false
 const $http = axios.create({
-  baseURL: 'http://192.168.1.103:3000/',
+  baseURL: 'http://192.168.1.101:3000/',
   timeout: 5000
   //headers: {'X-Custom-Header': 'foobar'}
 });

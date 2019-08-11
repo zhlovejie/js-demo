@@ -1,0 +1,111 @@
+/* miniprogram/pages/user/user.wxss */
+.user-container{
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.userinfo{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 20px;
+}
+.userinfo-avatar {
+  height: 64px;
+  line-height: 64px;
+  background-color: transparent;
+  flex-grow: 1;
+  text-align: left;
+  padding-left: 80px;
+  
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 0;
+}
+.userinfo .userinfo-logo{
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+}
+
+.userinfo-avatar:after {
+  border: none;
+}
+
+.userinfo-nickname {
+  font-size: 32rpx;
+  color: #007aff;
+  background-color: white;
+  background-size: cover;
+}
+
+.userinfo-nickname::after {
+  border: none;
+}
+.swiper-tab-bar{
+  margin: 10px 20px 0 20px;
+}
+.swiper-tab-bar .swiper-tab-bar-wrap{
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 3px;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid red;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+}
+.swiper-tab-bar .swiper-tab-bar-wrap .tag-item{
+  width: 50%;
+  text-align: center;
+  color: red;
+  transition: all .2s ease;
+}
+.swiper-tab-bar .swiper-tab-bar-wrap .tag-item.current{
+  color: #fff;
+  background-color: red;
+}
+
+.user-main .scroll-view-wrap{
+  margin-top: 10px;
+}
+.user-main .recipe-wrap{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin:0 20px 20px 20px;
+}
+.user-main .recipe-wrap .recipe-item{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.user-main .recipe-wrap .recipe-item.even{
+  margin-right: 10px;
+}
+.user-main .recipe-wrap .recipe-item .recipe-item-image{
+  border-radius: 6px;
+}
+.user-main .recipe-wrap .recipe-item .recipe-item-text{
+  font-size: 14px;
+  line-height: 24px;
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.user-main  .no-data-tips{
+  line-height: 60px;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+}
