@@ -9,7 +9,7 @@ page {
   margin-top: 40rpx;
   height: auto;
   width: 100%;
-  background: #fff;
+  background: #ffffff;
   padding: 0 40rpx;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-left: none;
