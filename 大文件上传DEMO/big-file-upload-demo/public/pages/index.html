@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      ol,
+      ul,
+      li {
+        list-style-type: none;
+      }
+
+      .container {
+        width: 1000px;
+        height: 600px;
+        margin: 50px auto;
+        display: flex;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      .main {
+        flex: 1;
+        border-right: 1px solid #ccc;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .slider-bar {
+        width: 70%;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .file-list-wrapper .file-item {
+        padding: 20px;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="main">
+        <input type="file" name="file" id="file" />
+        <div id="progress"></div>
+      </div>
+      <div class="slider-bar">
+
+      </div>
+    </div>
+    <script>
+      let fileElement = document.querySelector('#file')
+      let progressElement = document.querySelector('#progress')
+      let fileListElement = document.querySelector('.slider-bar')
+
+      let _api = {
+        upload: '/upload', //上传文件
+        marge: '/marge', //合并文件
+        checkHash: '/checkHash', //检测文件是否已存在，存在直接成功了
+        fileList: '/fileList', //上传的文件列表
+        fileDel: '/fileDel' //根据 hash 删除文件
+      }
+
+      fileElement.addEventListener('change', function () {
+        let file = this.files[0]
+        console.log(file)
+        let myWork = new Worker('/js/hash.js')
+        myWork.postMessage({
+          file
+        })
+        myWork.onmessage = async e => {
+          let {
+            chunkList,
+            progress,
+            hash
+          } = e.data
+          if (hash) {
+            let data = {
+              hash: hash,
+              fileName: file.name
+            }
+            let checkResult = await checkFileStatus(data).then(res => JSON.parse(res.data))
+            if (checkResult.data.status === 1) {
+              alert('文件已存在，秒传....')
+              return
+            } else {
+              await uploadAction(chunkList)
+              await marge(data)
+              await fetchFileList()
+            }
+          }
+        }
+      })
+
+      fetchFileList()
+
+      function uploadAction(chunkList) {
+        //debugger
+        let progressInfo = {}
+        let requestList = chunkList.map((item, idx) => {
+          let {
+            chunk,
+            hash,
+            hashIdx,
+            chunkName
+          } = item
+          const formData = new FormData()
+          formData.append('chunk', chunk)
+          formData.append('hashIdx', hashIdx)
+          formData.append('hash', hash)
+          progressInfo[chunkName] = 0
+          return {
+            formData,
+            progressEvent: (e) => {
+              progressInfo[chunkName] = parseInt(e.loaded / e.total * 100)
+              updateProgress(progressInfo)
+            }
+          }
+        }).map(({
+          formData,
+          progressEvent
+        }) => {
+          return request({
+            url: _api.upload,
+            data: formData,
+            onProgress: progressEvent
+          })
+        })
+        return Promise.all(requestList)
+      }
+
+      function marge(data) {
+        return request({
+          url: _api.marge,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: formatData(data)
+        })
+      }
+
+      function checkFileStatus(data) {
+        return request({
+          url: _api.checkHash,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: formatData(data)
+        })
+      }
+
+      function fetchFileList() {
+        return request({
+            url: _api.fileList,
+            method: 'GET'
+          }).then(res => JSON.parse(res.data))
+          .then(res => {
+            console.log(res)
+            let html = '<ul class="file-list-wrapper">'
+            res.data.map(f => {
+              html += `
+              <li class="file-item">
+                <p>hash:${f.hash}</p>
+                <p>文件名:${f.file.fileName}</p>
+                <p>文件大小:${f.file.size || '-'} Bytes</p>
+                <p>创建时间:${f.file.ctime || '-'}</p>
+                <p>
+                  <button onclick="fileDel('${f.hash}')">删除</button>  
+                </p>
+              </li>
+            `
+            })
+            html += '</ul>'
+            fileListElement.innerHTML = html
+          })
+      }
+
+      function fileDel(hash) {
+        return request({
+            url: _api.fileDel,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: formatData({
+              hash: hash
+            })
+          }).then(res => JSON.parse(res.data))
+          .then(res => {
+            alert(res.msg)
+            fetchFileList()
+          })
+      }
+
+
+      function request({
+        url,
+        method = 'POST',
+        data,
+        headers = {},
+        onProgress = e => e,
+        requestList
+      }) {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest()
+          xhr.upload.onprogress = onProgress
+          xhr.open(method, url)
+          Object.keys(headers).forEach(key => xhr.setRequestHeader(key, headers[key]))
+          xhr.send(data)
+          xhr.onload = e => {
+            resolve({
+              data: e.target.response
+            })
+          }
+          xhr.onerror = err => console.log(err)
+        })
+      }
+
+      function updateProgress(progressInfo) {
+        let html = ''
+        for (let k of Object.keys(progressInfo)) {
+          html += `<p>${k} 上传进度：${progressInfo[k]} %</p>`
+        }
+        progressElement.innerHTML = html
+      }
+
+      function formatData(data) {
+        let res = []
+        Object.keys(data).map(k => {
+          res.push(`${k}=${encodeURIComponent(data[k])}`)
+        })
+        return res.join('&')
+      }
+    </script>
+  </body>
+
+</html>

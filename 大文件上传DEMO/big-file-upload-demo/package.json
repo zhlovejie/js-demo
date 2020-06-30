@@ -1,0 +1,18 @@
+{
+  "name": "big_file_upload",
+  "version": "1.0.0",
+  "description": "a simple demo for big file upload...",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "author": "bean",
+  "license": "ISC",
+  "dependencies": {
+    "busboy": "^0.3.1",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-logger": "^3.2.1",
+    "koa-static": "^5.0.0"
+  }
+}
