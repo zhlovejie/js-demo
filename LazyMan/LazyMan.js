@@ -26,7 +26,6 @@ _LazyMan.prototype = {
 		t._queue.push(function(){
 			setTimeout(function(){
 				t.sleepDisplay(delay)
-				t.next()
 			},delay * 1000)
 		})
 		return this
@@ -36,7 +35,6 @@ _LazyMan.prototype = {
 		t._queue.unshift(function(){
 			setTimeout(function(){
 				t.sleepDisplay(delay)
-				t.next()
 			},delay * 1000)
 		})
 		return this
@@ -59,7 +57,7 @@ _LazyMan.prototype = {
 
 // LazyMan('Hank')
 
-// LazyMan('Hank').sleep(3).eat('dinner')
+ LazyMan('Hank').sleep(3).eat('dinner')
 
 // LazyMan('Hank').eat('dinner').eat('supper')
 
