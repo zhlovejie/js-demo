@@ -1,0 +1,294 @@
+{
+	"groups": [
+		{
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,description_json,sound-play_png,sound-stop_png,finger_png",
+			"name": "preload"
+		},
+		{
+			"keys": "lj-1.png,lj-10.png,lj-11.png,lj-12.png,lj-13.png,lj-14.png,lj-15.png,lj-16.png,lj-17.png,lj-18.png,lj-19.png,lj-2.png,lj-20.png,lj-3.png,lj-4.png,lj-5.png,lj-6.png,lj-7.png,lj-8.png,lj-9.png,lj-bg.png,lj-logo-1.png,lj-logo-2.png,lj-logo-3.jpg,lj-zhu.gif,trash-ganlaji.png,trash-kehuishou.png,trash-shilaji.png,trash-youhai.png,finger.png",
+			"name": "lj"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/CheckBox/checkbox_select_disabled.png",
+			"type": "image",
+			"name": "checkbox_select_disabled_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_down.png",
+			"type": "image",
+			"name": "checkbox_select_down_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_up.png",
+			"type": "image",
+			"name": "checkbox_select_up_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_unselect.png",
+			"type": "image",
+			"name": "checkbox_unselect_png"
+		},
+		{
+			"url": "assets/ItemRenderer/selected.png",
+			"type": "image",
+			"name": "selected_png"
+		},
+		{
+			"url": "assets/Panel/border.png",
+			"type": "image",
+			"name": "border_png"
+		},
+		{
+			"url": "assets/Panel/header.png",
+			"type": "image",
+			"name": "header_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_disabled.png",
+			"type": "image",
+			"name": "radiobutton_select_disabled_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_down.png",
+			"type": "image",
+			"name": "radiobutton_select_down_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_up.png",
+			"type": "image",
+			"name": "radiobutton_select_up_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_unselect.png",
+			"type": "image",
+			"name": "radiobutton_unselect_png"
+		},
+		{
+			"url": "assets/ScrollBar/roundthumb.png",
+			"type": "image",
+			"name": "roundthumb_png"
+		},
+		{
+			"url": "assets/Slider/thumb.png",
+			"type": "image",
+			"name": "thumb_png"
+		},
+		{
+			"url": "assets/Slider/track.png",
+			"type": "image",
+			"name": "track_png"
+		},
+		{
+			"url": "assets/Slider/tracklight.png",
+			"type": "image",
+			"name": "tracklight_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/handle.png",
+			"type": "image",
+			"name": "handle_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/off.png",
+			"type": "image",
+			"name": "off_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/on.png",
+			"type": "image",
+			"name": "on_png"
+		},
+		{
+			"url": "assets/Button/button_down.png",
+			"type": "image",
+			"name": "button_down_png"
+		},
+		{
+			"url": "assets/Button/button_up.png",
+			"type": "image",
+			"name": "button_up_png"
+		},
+		{
+			"url": "assets/ProgressBar/thumb_pb.png",
+			"type": "image",
+			"name": "thumb_pb_png"
+		},
+		{
+			"url": "assets/ProgressBar/track_pb.png",
+			"type": "image",
+			"name": "track_pb_png"
+		},
+		{
+			"url": "assets/ScrollBar/track_sb.png",
+			"type": "image",
+			"name": "track_sb_png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"url": "assets/Custom/lj-1.png",
+			"type": "image",
+			"name": "lj-1.png"
+		},
+		{
+			"url": "assets/Custom/lj-10.png",
+			"type": "image",
+			"name": "lj-10.png"
+		},
+		{
+			"url": "assets/Custom/lj-11.png",
+			"type": "image",
+			"name": "lj-11.png"
+		},
+		{
+			"url": "assets/Custom/lj-12.png",
+			"type": "image",
+			"name": "lj-12.png"
+		},
+		{
+			"url": "assets/Custom/lj-13.png",
+			"type": "image",
+			"name": "lj-13.png"
+		},
+		{
+			"url": "assets/Custom/lj-14.png",
+			"type": "image",
+			"name": "lj-14.png"
+		},
+		{
+			"url": "assets/Custom/lj-15.png",
+			"type": "image",
+			"name": "lj-15.png"
+		},
+		{
+			"url": "assets/Custom/lj-16.png",
+			"type": "image",
+			"name": "lj-16.png"
+		},
+		{
+			"url": "assets/Custom/lj-17.png",
+			"type": "image",
+			"name": "lj-17.png"
+		},
+		{
+			"url": "assets/Custom/lj-18.png",
+			"type": "image",
+			"name": "lj-18.png"
+		},
+		{
+			"url": "assets/Custom/lj-19.png",
+			"type": "image",
+			"name": "lj-19.png"
+		},
+		{
+			"url": "assets/Custom/lj-2.png",
+			"type": "image",
+			"name": "lj-2.png"
+		},
+		{
+			"url": "assets/Custom/lj-20.png",
+			"type": "image",
+			"name": "lj-20.png"
+		},
+		{
+			"url": "assets/Custom/lj-3.png",
+			"type": "image",
+			"name": "lj-3.png"
+		},
+		{
+			"url": "assets/Custom/lj-4.png",
+			"type": "image",
+			"name": "lj-4.png"
+		},
+		{
+			"url": "assets/Custom/lj-5.png",
+			"type": "image",
+			"name": "lj-5.png"
+		},
+		{
+			"url": "assets/Custom/lj-6.png",
+			"type": "image",
+			"name": "lj-6.png"
+		},
+		{
+			"url": "assets/Custom/lj-7.png",
+			"type": "image",
+			"name": "lj-7.png"
+		},
+		{
+			"url": "assets/Custom/lj-8.png",
+			"type": "image",
+			"name": "lj-8.png"
+		},
+		{
+			"url": "assets/Custom/lj-9.png",
+			"type": "image",
+			"name": "lj-9.png"
+		},
+		{
+			"url": "assets/Custom/lj-bg.png",
+			"type": "image",
+			"name": "lj-bg.png"
+		},
+		{
+			"url": "assets/Custom/lj-logo-1.png",
+			"type": "image",
+			"name": "lj-logo-1.png"
+		},
+		{
+			"url": "assets/Custom/lj-logo-2.png",
+			"type": "image",
+			"name": "lj-logo-2.png"
+		},
+		{
+			"url": "assets/Custom/lj-logo-3.jpg",
+			"type": "image",
+			"name": "lj-logo-3.jpg"
+		},
+		{
+			"url": "assets/Custom/lj-zhu.gif",
+			"type": "image",
+			"name": "lj-zhu.gif"
+		},
+		{
+			"url": "assets/Custom/trash-ganlaji.png",
+			"type": "image",
+			"name": "trash-ganlaji.png"
+		},
+		{
+			"url": "assets/Custom/trash-kehuishou.png",
+			"type": "image",
+			"name": "trash-kehuishou.png"
+		},
+		{
+			"url": "assets/Custom/trash-shilaji.png",
+			"type": "image",
+			"name": "trash-shilaji.png"
+		},
+		{
+			"url": "assets/Custom/trash-youhai.png",
+			"type": "image",
+			"name": "trash-youhai.png"
+		},
+		{
+			"name": "sound-play_png",
+			"type": "image",
+			"url": "assets/Custom/sound-play.png"
+		},
+		{
+			"name": "sound-stop_png",
+			"type": "image",
+			"url": "assets/Custom/sound-stop.png"
+		},
+		{
+			"name": "finger.png",
+			"type": "image",
+			"url": "assets/Custom/finger.png"
+		}
+	]
+}

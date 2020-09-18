@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="S3exml" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="lj-bg.png" x="0" y="0" width="640" height="1136" fillMode="repeat"/>
+	<e:Label id="lblGameOver" text="GAME OVER" x="66.5" y="339" anchorOffsetX="0" width="507" anchorOffsetY="0" height="80" textAlign="center" fontFamily="Microsoft YaHei" size="72" textColor="0x83c3b0" verticalAlign="middle" border="false" bold="false" stroke="0" strokeColor="0x83c3b0"/>
+	<e:Button id="btnReset" label="再来一次" x="319" y="554" width="300" height="60" anchorOffsetX="149" anchorOffsetY="32"/>
+</e:Skin>

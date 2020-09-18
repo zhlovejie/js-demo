@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="S1exml" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="imgBg" source="lj-bg.png" x="0" y="0" width="640" height="1136" fillMode="repeat"/>
+	<e:Image id="imgLogo" source="lj-logo-2.png" x="204.23" y="310.86" anchorOffsetX="0" width="231.54" anchorOffsetY="0" height="390.14" fillMode="scale"/>
+	<e:Label id="lblWelcome" text="美好生活\n从垃圾分类开始" x="152" y="148" textColor="0x83c3b0" size="48" textAlign="center" fontFamily="Microsoft YaHei"/>
+	<e:Button id="btnStart" label="开始游戏" x="320" y="831" width="300" height="60" anchorOffsetX="150" anchorOffsetY="31"/>
+	<e:Image id="imgSoundPlay" source="sound-play_png" x="520" y="101"/>
+	<e:Image id="imgSoundStop" source="sound-stop_png" x="520" y="101"/>
+</e:Skin>

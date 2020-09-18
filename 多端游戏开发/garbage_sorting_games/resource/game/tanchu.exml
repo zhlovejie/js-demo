@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="tanchu" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="640" height="1136" x="0" y="0" fillColor="0x000000" fillAlpha="0"/>
+	<e:Rect width="400" height="450" horizontalCenter="0" verticalCenter="0" fillAlpha="1" strokeWeight="16" strokeColor="0x83c3b0" strokeAlpha="1" ellipseWidth="16" ellipseHeight="16" fillColor="0xd2f3e9"/>
+	<e:Label id="lblName" text="" horizontalCenter="0" verticalCenter="-161" textColor="0x000000" fontFamily="Microsoft YaHei" width="300" height="60" textAlign="center" verticalAlign="middle"/>
+	<e:Label id="lblTypeName" text="" horizontalCenter="0" verticalCenter="-106" textColor="0x000000" fontFamily="Microsoft YaHei" size="20" height="30" width="300" textAlign="center" verticalAlign="middle"/>
+	<e:Label id="lblDesc" text="" horizontalCenter="0" verticalCenter="-11" textColor="0x000000" size="16" fontFamily="Microsoft YaHei" width="300" height="120"/>
+	<e:Button id="btnClose" label="关闭" x="170" y="670" anchorOffsetX="0" width="300" anchorOffsetY="0" height="60"/>
+</e:Skin>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="S2exml" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<w:Config id="1746b49c183"/>
+	<e:Image id="imgBG" source="lj-bg.png" x="0" y="0" fillMode="repeat" width="640" height="1136"/>
+	<e:Image id="btnYouhai" source="trash-youhai.png" x="51" anchorOffsetX="0" width="105" anchorOffsetY="0" height="176" bottom="67"/>
+	<e:Image id="btnShilaji" source="trash-shilaji.png" x="345" width="105" height="176" bottom="67"/>
+	<e:Image id="btnKehuishou" source="trash-kehuishou.png" x="198" width="105" height="176" bottom="67"/>
+	<e:Image id="btnGanlaji" source="trash-ganlaji.png" x="491.67" width="105" height="176" bottom="67"/>
+	<e:Rect id="rectTimer" width="60" height="60" x="536.67" y="30" ellipseWidth="60" ellipseHeight="60" fillColor="0xd2f3e9" strokeColor="0x83c3b0" strokeWeight="6"/>
+	<e:Label id="lblTimer" text="0" x="536.67" y="30" width="60" height="60" textAlign="center" verticalAlign="middle" textColor="0x000000" fontFamily="Microsoft YaHei" size="26"/>
+	<e:Image id="imgFinger" source="finger.png" x="319" y="272" anchorOffsetX="52" anchorOffsetY="75"/>
+
+</e:Skin>

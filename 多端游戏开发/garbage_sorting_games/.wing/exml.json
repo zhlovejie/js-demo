@@ -1,0 +1,31 @@
+{
+  "global": {
+    "globalAutoLayerMarkEnable": true
+  },
+  "1746b49c183": {
+    "guideLinesEnabled": false,
+    "backgroundX": 0,
+    "backgroundY": 0,
+    "backgroundWidth": -1,
+    "backgroundHeight": -1,
+    "useBgImage": true,
+    "useBgColor": true,
+    "backgroundAlpha": 100
+  },
+  "1746c626517": {
+    "path": "..\\resource\\eui_skins\\ItemLaji.ts",
+    "class": "ItemLaji",
+    "parentPath": ""
+  },
+  "1747671fbc7": {
+    "backgroundType": "null",
+    "backgroundColor": "#ffffff",
+    "backgroundAlpha": 100,
+    "backgroundX": 0,
+    "backgroundY": 0,
+    "backgroundWidth": -1,
+    "backgroundHeight": -1,
+    "useBgImage": true,
+    "useBgColor": true
+  }
+}
