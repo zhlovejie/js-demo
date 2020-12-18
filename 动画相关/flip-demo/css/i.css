@@ -1,0 +1,98 @@
+*{margin:0;padding: 0;box-sizing: border-box;}
+html,body {
+  line-height:1.15;
+  -webkit-text-size-adjust:100%;
+  background-color: #f5f5f5;
+}
+.container {
+  width: 840px;
+  padding: 0 20px 20px 20px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+.option-wrapper{
+  padding: 10px 0;
+  text-align: center;
+  background-color: #fff;
+  transition: all .2s;
+}
+.option-wrapper-fix{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 6px #ccc;
+}
+
+.img-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+.img-item {
+  display: inline-block;
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  margin: -1px 0 0 -1px;
+}
+
+
+#app{
+  position: relative;
+  width:100px;
+  height:100px;
+  background: red;
+}
+.app-to-left{
+  left: 200px;
+}
+.animate-on-transforms{
+  transition: all 2s;
+}
+#app.test-toggle-class{
+  background-color: beige;
+}
+
+
+
+.c-button{
+  line-height: 1.5175;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  height: 32px;
+  padding: 4px 15px;
+  font-size: 14px;
+  border-radius: 2px;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  color: rgba(0, 0, 0, .85);
+  transition: all .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.c-button,.c-button:active,.c-button:focus{
+  outline: none;
+}
+
+.c-button-primary{
+  color: #fff;
+  background: #1890ff;
+  border-color: #1890ff;
+}
+
+.c-button-primary:focus,.c-button-primary:hover{
+  color: #fff;
+  background: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.c-button-group > .c-button{
+  margin-right: 10px;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLIP 动画-DEMO</title>
+  <link rel="stylesheet" href="./css/i.css">
+</head>
+<body>
+  <div class="container">
+    <div class="option-wrapper">
+      <div class="c-button-group">
+        <button class="c-button c-button-primary" onclick="startAnimate()">开始动画</button>
+        <button class="c-button c-button-primary" onclick="toggleClass()">原生切换class</button>
+      </div>
+    </div>
+    <div id="app"></div>
+  </div>
+  <script>
+    const App = _$('app')
+    function startAnimate(){
+      let app = App;
+      let first = app.getBoundingClientRect();
+      app.classList.add('app-to-left');
+      let last = app.getBoundingClientRect();
+      let invert = first.left - last.left;
+      //使元素看起来好像在起始点
+      app.style.transform = `translateX(${invert}px)`;
+      requestAnimationFrame(function() {
+        //启用tansition，并移除翻转的改变
+        app.classList.add('animate-on-transforms');
+        app.style.transform = '';
+      });
+      app.addEventListener('transitionend', () => {
+        app.classList.remove('animate-on-transforms','app-to-left');
+      })
+    }
+
+    function toggleClass(){
+      App.classList.toggle('test-toggle-class')
+    }
+
+    function _$(id){
+      return document.getElementById(id)
+    }
+  </script>
+</body>
+</html>
