@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nodejs with cors demo</title>
+  </head>
+
+  <body>
+    <div>
+      <button onclick="doAction('get')">send cors get request</button>
+      <button onclick="doAction('post')">send cors post request</button>
+    </div>
+    <script>
+      /**POST 请求 */
+      const httpPost = (url, data, callback, err = console.error) => {
+        const request = new XMLHttpRequest();
+        request.open('POST', url, true);
+        request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        request.onload = () => callback(request);
+        request.onerror = (error) => {
+          console.log(error)
+          err(request)
+        };
+        request.withCredentials = true
+        request.timeout = 30 * 100
+        request.ontimeout = () => {
+          console.log(request)
+        }
+        request.send(JSON.stringify(data))
+      };
+
+      /**GET 请求 */
+      const httpGet = (url, callback, err = console.error) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.onload = () => callback(request);
+        request.onerror = (error) => {
+          console.log(error)
+          err(request)
+        };
+        request.withCredentials = true
+        request.timeout = 30 * 100
+        request.ontimeout = () => {
+          console.log(request)
+        }
+        request.send();
+      };
+
+      function doAction(method = 'get') {
+        // https
+        const baseURL = 'https://localhost:8080'
+        // http
+        // const baseURL = 'http://localhost:3000'
+
+        let makeUrl = url => `${baseURL}${url}`
+
+        method = method.toUpperCase()
+        if (method === 'GET') {
+          httpGet(makeUrl('/simple'), function (res) {
+            console.log(res)
+            console.log(res.getAllResponseHeaders())
+          }, function (req) {
+            console.log(req)
+          })
+        }
+        if (method === 'POST') {
+          httpPost(makeUrl('/simple'), { name: 'tom', age: 20 }, function (res) {
+            console.log(res)
+            console.log(res.getAllResponseHeaders())
+          }, function (req) {
+            console.log(req)
+          })
+        }
+      }
+    </script>
+  </body>
+
+</html>
